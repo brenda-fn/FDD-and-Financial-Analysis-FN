@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Franchise Nova — Scenthound Financial Analysis</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Lato',sans-serif;background:#e8eaf0;color:#1a1a2e;line-height:1.6;padding:32px 20px;-webkit-font-smoothing:antialiased;}
+.doc{max-width:900px;margin:0 auto;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 4px 32px rgba(0,0,0,0.12);}
+/* HEADER */
+.hdr{background:linear-gradient(135deg,#05040a,#0d0a1c,#161033);padding:28px 40px 24px;position:relative;overflow:hidden;}
+.hdr::before{content:'';position:absolute;top:-60px;right:-60px;width:300px;height:300px;background:radial-gradient(circle,rgba(0,174,239,0.3),transparent 65%);pointer-events:none;}
+.hlogo{font-size:11px;letter-spacing:.15em;color:rgba(255,255,255,0.4);margin-bottom:12px;font-weight:700;font-family:'Montserrat',sans-serif;}
+.heye{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:#00aeef;margin-bottom:6px;font-weight:700;font-family:'Montserrat',sans-serif;}
+.htitle{font-size:26px;font-weight:900;color:#fff;margin-bottom:4px;font-family:'Montserrat',sans-serif;}
+.hmeta{font-size:12px;color:#b0aed0;}
+/* SCORE STRIP */
+.score-strip{display:grid;grid-template-columns:repeat(5,1fr);border-bottom:1px solid #e8eaf0;background:linear-gradient(90deg,rgba(0,174,239,0.06),transparent);}
+.ss{padding:14px 16px;border-right:1px solid #e8eaf0;text-align:center;}
+.ss:last-child{border-right:none;}
+.ss-val{font-family:'Montserrat',sans-serif;font-weight:900;font-size:22px;line-height:1;margin-bottom:3px;}
+.ss-lbl{font-size:9px;font-family:'Montserrat',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#888;}
+/* SECTION */
+.sec{padding:20px 40px;border-bottom:1px solid #e8eaf0;}
+.sec-lbl{font-family:'Montserrat',sans-serif;font-weight:800;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:#452e80;margin-bottom:14px;}
+/* TABLES */
+table{width:100%;border-collapse:collapse;font-size:12px;}
+th{font-family:'Montserrat',sans-serif;font-weight:800;font-size:9px;letter-spacing:.08em;text-transform:uppercase;padding:8px 10px;text-align:left;}
+.th-dark{background:#0d0a1c;color:#fff;}
+.th-cyan{background:#1a1040;color:#00aeef;}
+td{padding:7px 10px;border-bottom:1px solid #e8eaf0;color:#1a1a2e;vertical-align:top;line-height:1.45;}
+tr:nth-child(even) td{background:#f9f9fc;}
+tr:last-child td{border-bottom:none;font-weight:700;}
+.tdm{font-family:'Montserrat',sans-serif;font-weight:700;font-size:11px;color:#452e80;}
+/* FLAGS */
+.flag-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.flag-card{border-radius:8px;padding:14px 16px;}
+.fg{background:#f0f9f0;border-left:3px solid #1a7a4a;}
+.fr{background:#fff0f4;border-left:3px solid #b1456b;}
+.flag-title{font-family:'Montserrat',sans-serif;font-weight:800;font-size:9px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:9px;}
+.fg .flag-title{color:#1a7a4a;}
+.fr .flag-title{color:#b1456b;}
+.flag-list{padding-left:14px;margin:0;}
+.flag-list li{font-size:12px;margin-bottom:6px;line-height:1.5;}
+.fg .flag-list li{color:#1a3a12;}
+.fr .flag-list li{color:#4a1020;}
+/* SCENARIO */
+.scen-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+.scen{border-radius:8px;padding:14px 16px;}
+.scen-base{background:#f5f5fa;border-top:3px solid #452e80;}
+.scen-best{background:#f0f9f0;border-top:3px solid #1a7a4a;}
+.scen-worst{background:#fff0f4;border-top:3px solid #b1456b;}
+.scen-title{font-family:'Montserrat',sans-serif;font-weight:800;font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px;}
+.scen-base .scen-title{color:#452e80;}
+.scen-best .scen-title{color:#1a7a4a;}
+.scen-worst .scen-title{color:#b1456b;}
+.scen-row{display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:5px;padding-bottom:5px;border-bottom:1px solid rgba(0,0,0,0.06);}
+.scen-row:last-child{border-bottom:none;font-weight:700;font-size:12px;}
+.scen-row span:first-child{color:#666;}
+.scen-row span:last-child{font-family:'Montserrat',sans-serif;font-weight:700;}
+/* FEE VISUAL */
+.fee-bar-wrap{margin-bottom:12px;}
+.fee-label{display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px;}
+.fee-label span:first-child{color:#555;}
+.fee-label span:last-child{font-family:'Montserrat',sans-serif;font-weight:700;color:#1a1a2e;}
+.fee-bar{height:10px;background:#e8eaf0;border-radius:999px;overflow:hidden;}
+.fee-fill{height:100%;border-radius:999px;}
+/* MATURITY */
+.mat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+.mat-card{background:#f9f9fc;border-radius:8px;padding:12px 14px;border-left:3px solid #e8eaf0;}
+.mat-name{font-family:'Montserrat',sans-serif;font-weight:800;font-size:10px;color:#1a1a2e;margin-bottom:4px;}
+.mat-stat{font-size:11.5px;color:#555;line-height:1.5;}
+/* ROI */
+.roi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+.roi-card{background:#f0f7ff;border-radius:8px;padding:12px 14px;text-align:center;}
+.roi-val{font-family:'Montserrat',sans-serif;font-weight:900;font-size:18px;color:#282560;margin-bottom:3px;}
+.roi-lbl{font-size:9px;font-family:'Montserrat',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#888;}
+/* DATA GAP */
+.gap-note{background:#fff8e1;border-left:3px solid #b86e00;padding:10px 14px;border-radius:0 6px 6px 0;font-size:11.5px;color:#5a4000;margin-top:10px;line-height:1.6;}
+/* FOOTER */
+.ftr{background:#0d0a1c;padding:14px 40px;}
+.ftr p{font-size:11px;color:#666;line-height:1.5;}
+.good{color:#1a7a4a;font-weight:700;}
+.warn{color:#b86e00;font-weight:700;}
+.bad{color:#b1456b;font-weight:700;}
+@media print{body{background:#fff;padding:0;}.doc{box-shadow:none;border-radius:0;}.hdr{-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+
+/* ── Watermark ─────────────────────────────────── */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    pointer-events: none;
+    z-index: 9999;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='700' height='400'%3E%3Ctext x='50%25' y='44%25' text-anchor='middle' dominant-baseline='middle' font-family='Helvetica Neue, Arial, sans-serif' font-weight='700' font-size='52' fill='%23282560' fill-opacity='0.055' transform='rotate(-35 350 200)'%3ECONFIDENTIAL%3C/text%3E%3Ctext x='50%25' y='64%25' text-anchor='middle' dominant-baseline='middle' font-family='Helvetica Neue, Arial, sans-serif' font-weight='700' font-size='21' fill='%23282560' fill-opacity='0.055' transform='rotate(-35 350 200)'%3EINTERNAL USE ONLY · FRANCHISE NOVA%3C/text%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 700px 400px;
+}
+@media print {
+  body::before {
+    position: fixed;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+</style>
+</head>
+<body>
+<div class="doc">
+
+<div class="hdr">
+  <div class="hlogo">BLK GRVTY / FRANCHISE NOVA</div>
+  <div class="heye">Financial Analysis · FDD-Based</div>
+  <div class="htitle">Scenthound — Financial Analysis</div>
+  <p class="hmeta">Based on 2024 FDD &nbsp;·&nbsp; Scenthound Franchising LLC &nbsp;·&nbsp; Jupiter, FL &nbsp;·&nbsp; Data as of FDD filing date</p>
+</div>
+
+<!-- SCORE STRIP -->
+<div class="score-strip">
+  <div class="ss"><div class="ss-val" style="color:#00aeef">71</div><div class="ss-lbl">Total Units</div></div>
+  <div class="ss"><div class="ss-val" style="color:#1a7a4a">$457K</div><div class="ss-lbl">Median AUV</div></div>
+  <div class="ss"><div class="ss-val" style="color:#1a7a4a">13.8%</div><div class="ss-lbl">Median NOI</div></div>
+  <div class="ss"><div class="ss-val" style="color:#1a7a4a">0</div><div class="ss-lbl">Terminations (3 yrs)</div></div>
+  <div class="ss"><div class="ss-val" style="color:#1a7a4a">&lt;1%</div><div class="ss-lbl">Annual Churn</div></div>
+</div>
+
+<!-- UNIT COUNT & SYSTEM HEALTH -->
+<div class="sec">
+  <div class="sec-lbl">Unit Count & System Growth (Item 20)</div>
+  <table>
+    <tr><th class="th-dark">Year</th><th class="th-dark">Units at Start</th><th class="th-dark">Openings</th><th class="th-dark">Closures</th><th class="th-dark">Terminations</th><th class="th-dark">Units at End</th><th class="th-dark">Net Change</th></tr>
+    <tr><td class="tdm">2021</td><td>18</td><td>16</td><td>0</td><td style="color:#1a7a4a;font-weight:700;">0</td><td>34</td><td style="color:#1a7a4a;font-weight:700;">+16</td></tr>
+    <tr><td class="tdm">2022</td><td>34</td><td>37</td><td>0</td><td style="color:#1a7a4a;font-weight:700;">0</td><td>71</td><td style="color:#1a7a4a;font-weight:700;">+37</td></tr>
+    <tr><td class="tdm">2023 (FDD period end)</td><td>71</td><td>—</td><td>0</td><td style="color:#1a7a4a;font-weight:700;">0</td><td>71</td><td>—</td></tr>
+    <tr><td class="tdm">Annual Churn Rate</td><td colspan="6" style="color:#1a7a4a;font-weight:700;">&lt;1% — effectively zero. 0 terminations across entire 3-year measurement period.</td></tr>
+  </table>
+  <div class="gap-note">⚑ <strong>Data note:</strong> Item 19 includes 34 qualifying units with 22 providing full P&L. The remaining 12 qualifying units reported revenue but not full expense data. 37 units opened after the measurement period are excluded. This limits the data set to roughly 31% of the total system — a moderate gap. Ask at Discovery Day for current franchisee performance data beyond the 22 units reported.</div>
+</div>
+
+<!-- P&L PERFORMANCE -->
+<div class="sec">
+  <div class="sec-lbl">P&L Performance — Item 19 (22 Units Full P&L, 2023 Data)</div>
+  <table>
+    <tr><th class="th-dark">Metric</th><th class="th-cyan">Top Quartile</th><th class="th-cyan">Median</th><th class="th-cyan">Bottom Quartile</th><th class="th-dark">FN Assessment</th></tr>
+    <tr><td class="tdm">Annual Revenue (AUV)</td><td style="color:#1a7a4a;font-weight:700;">$611K+</td><td>$457K</td><td style="color:#b86e00;font-weight:700;">$303K–</td><td>Median is healthy for a single-unit. Multi-unit compounds well.</td></tr>
+    <tr><td class="tdm">NOI ($)</td><td style="color:#1a7a4a;font-weight:700;">$154K+</td><td>$71K</td><td style="color:#b1456b;font-weight:700;">$4K</td><td>Wide spread. Bottom quartile NOI of $4K on ~$303K revenue is 1.2% — near breakeven.</td></tr>
+    <tr><td class="tdm">NOI (%)</td><td style="color:#1a7a4a;font-weight:700;">25%+</td><td style="color:#1a7a4a;font-weight:700;">13.8%</td><td style="color:#b1456b;font-weight:700;">1.2%</td><td>Median is strong. Gap between median and bottom is significant — GM quality likely driver.</td></tr>
+    <tr><td class="tdm">Membership Revenue Model</td><td colspan="3" style="color:#1a7a4a;font-weight:700;">$40–$60/month per member — recurring, predictable</td><td>Recurring revenue is a core differentiator for debt service stability.</td></tr>
+  </table>
+  <div class="gap-note">⚑ <strong>Year-over-year comparison:</strong> The 2024 FDD does not provide multi-year P&L comparison data for the same units. Year-to-year margin trend is not directly calculable from this FDD. This is a data gap — request 2023 to 2024 same-store sales comparison from the franchisor at Discovery Day.</div>
+</div>
+
+<!-- FEES -->
+<div class="sec">
+  <div class="sec-lbl">Fee Structure — All Fees (Items 5 & 6)</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+    <div>
+      <p style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:#452e80;margin-bottom:10px;">Initial Fees</p>
+      <table>
+        <tr><th class="th-dark">Fee</th><th class="th-dark">Amount</th></tr>
+        <tr><td class="tdm">Initial Franchise Fee (single)</td><td>$49,900</td></tr>
+        <tr><td class="tdm">2-unit development</td><td>$89,900</td></tr>
+        <tr><td class="tdm">4-unit development</td><td style="color:#1a7a4a;font-weight:700;">$119,900 (−40% per unit)</td></tr>
+        <tr><td class="tdm">Refundable?</td><td style="color:#b1456b;font-weight:700;">No — non-refundable</td></tr>
+      </table>
+    </div>
+    <div>
+      <p style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:#452e80;margin-bottom:10px;">Ongoing Fee Burden</p>
+      <div class="fee-bar-wrap"><div class="fee-label"><span>Royalty</span><span>6.0%</span></div><div class="fee-bar"><div class="fee-fill" style="width:55%;background:#452e80;"></div></div></div>
+      <div class="fee-bar-wrap"><div class="fee-label"><span>Brand Fund</span><span>2.0%</span></div><div class="fee-bar"><div class="fee-fill" style="width:18%;background:#664ca9;"></div></div></div>
+      <div class="fee-bar-wrap"><div class="fee-label"><span>Technology</span><span>~0.6%</span></div><div class="fee-bar"><div class="fee-fill" style="width:6%;background:#9b8fc8;"></div></div></div>
+      <div class="fee-bar-wrap" style="margin-top:8px;"><div class="fee-label"><span style="font-weight:700;color:#1a1a2e;">Total Effective Burden</span><span style="font-weight:700;color:#1a7a4a;">~8.6% of gross</span></div><div class="fee-bar"><div class="fee-fill" style="width:78%;background:#1a7a4a;"></div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- REVENUE REQUIRED -->
+<div class="sec">
+  <div class="sec-lbl">Revenue Required to Break Even & Achieve Target Returns</div>
+  <table>
+    <tr><th class="th-dark">Scenario</th><th class="th-dark">Annual Revenue Needed</th><th class="th-dark">At 13.8% Median NOI</th><th class="th-dark">SBA Debt Service Coverage</th><th class="th-dark">Notes</th></tr>
+    <tr><td class="tdm">Break Even (cover all costs, 0% NOI)</td><td>~$380K</td><td>—</td><td style="color:#b1456b;font-weight:700;">Below 1.0x — unsustainable</td><td>Must exceed $380K to cover full cost structure</td></tr>
+    <tr><td class="tdm">Cover SBA Debt Service Only (~$62K/yr at $500K loan)</td><td>~$450K</td><td>$62K NOI</td><td style="color:#b86e00;font-weight:700;">~1.0x — tight</td><td>Near median AUV — achievable but no margin</td></tr>
+    <tr><td class="tdm">1.25x DSCR (SBA minimum)</td><td>~$540K</td><td>$75K NOI</td><td style="color:#1a7a4a;font-weight:700;">1.25x — SBA minimum met</td><td>Above median AUV — requires top-half performance</td></tr>
+    <tr><td class="tdm">Healthy Operations (15% NOI target)</td><td>~$580K+</td><td>$87K+ NOI</td><td style="color:#1a7a4a;font-weight:700;">1.4x+</td><td>Upper quartile achievers — attainable with strong GM</td></tr>
+  </table>
+</div>
+
+<!-- SCENARIO ANALYSIS -->
+<div class="sec">
+  <div class="sec-lbl">Sensitivity / Scenario Analysis — Single Unit at $500K Loan, 9% Rate, 10-Yr Term</div>
+  <div class="scen-grid">
+    <div class="scen scen-worst">
+      <div class="scen-title">⚠ Worst Case</div>
+      <div class="scen-row"><span>Annual Revenue</span><span style="color:#b1456b;">$303K (bottom quartile)</span></div>
+      <div class="scen-row"><span>Total Fee Burden (8.6%)</span><span>$26K</span></div>
+      <div class="scen-row"><span>Est. Operating Costs</span><span>$271K</span></div>
+      <div class="scen-row"><span>NOI</span><span style="color:#b1456b;">$4K (1.2%)</span></div>
+      <div class="scen-row"><span>Annual Debt Service</span><span>$62K</span></div>
+      <div class="scen-row"><span>DSCR</span><span style="color:#b1456b;">0.06x — Default risk</span></div>
+      <div class="scen-row"><span>Outcome</span><span style="color:#b1456b;">Not viable</span></div>
+    </div>
+    <div class="scen scen-base">
+      <div class="scen-title">📊 Base Case</div>
+      <div class="scen-row"><span>Annual Revenue</span><span>$457K (median)</span></div>
+      <div class="scen-row"><span>Total Fee Burden (8.6%)</span><span>$39K</span></div>
+      <div class="scen-row"><span>Est. Operating Costs</span><span>$355K</span></div>
+      <div class="scen-row"><span>NOI</span><span style="color:#452e80;font-weight:700;">$71K (13.8%)</span></div>
+      <div class="scen-row"><span>Annual Debt Service</span><span>$62K</span></div>
+      <div class="scen-row"><span>DSCR</span><span style="color:#b86e00;">1.15x — near SBA min</span></div>
+      <div class="scen-row"><span>Outcome</span><span style="color:#b86e00;">Viable — tight on SBA</span></div>
+    </div>
+    <div class="scen scen-best">
+      <div class="scen-title">✓ Best Case</div>
+      <div class="scen-row"><span>Annual Revenue</span><span>$611K (top quartile)</span></div>
+      <div class="scen-row"><span>Total Fee Burden (8.6%)</span><span>$53K</span></div>
+      <div class="scen-row"><span>Est. Operating Costs</span><span>$457K</span></div>
+      <div class="scen-row"><span>NOI</span><span style="color:#1a7a4a;font-weight:700;">$154K (25.2%)</span></div>
+      <div class="scen-row"><span>Annual Debt Service</span><span>$62K</span></div>
+      <div class="scen-row"><span>DSCR</span><span style="color:#1a7a4a;">2.48x — Excellent</span></div>
+      <div class="scen-row"><span>Outcome</span><span style="color:#1a7a4a;">Strong investment</span></div>
+    </div>
+  </div>
+  <div class="gap-note" style="margin-top:12px;">⚑ <strong>4-Unit Multi-Unit Note:</strong> At 4 units with a 40% development fee discount and shared GM/back-office overhead, the economics improve significantly. If 3 of 4 units perform at median and 1 at top quartile, combined NOI approaches $280K+ — well above SBA debt service for the full 4-unit development. Multi-unit is the stronger investment case for this system.</div>
+</div>
+
+<!-- ROI ANALYSIS -->
+<div class="sec">
+  <div class="sec-lbl">ROI Analysis — Does It Make Sense? (Base Case, Single Unit)</div>
+  <div class="roi-grid">
+    <div class="roi-card"><div class="roi-val" style="color:#1a7a4a;">~7 yrs</div><div class="roi-lbl">Payback Period</div></div>
+    <div class="roi-card"><div class="roi-val" style="color:#1a7a4a;">~14%</div><div class="roi-lbl">Cash-on-Cash Return (Yr 2+)</div></div>
+    <div class="roi-card"><div class="roi-val" style="color:#b86e00;">1.15x</div><div class="roi-lbl">DSCR Base Case</div></div>
+    <div class="roi-card"><div class="roi-val" style="color:#1a7a4a;">4-unit</div><div class="roi-lbl">Optimal Entry Structure</div></div>
+  </div>
+  <div style="margin-top:14px;font-size:12.5px;color:#333;line-height:1.7;">
+    <strong>FN Assessment:</strong> At median performance, Scenthound generates a viable but modestly tight return for a single unit with SBA financing. The investment case improves significantly at 4+ units where the development fee discount reduces per-unit acquisition cost by ~40%, shared operational overhead improves margins, and combined NOI provides strong debt service coverage. The recurring membership revenue model provides more predictable cash flow for debt service than transactional concepts — a meaningful structural advantage.
+  </div>
+</div>
+
+<!-- MATURITY -->
+<div class="sec">
+  <div class="sec-lbl">Location Maturity — FDD Item 19 & 20 Data</div>
+  <div class="mat-grid">
+    <div class="mat-card" style="border-left-color:#1a7a4a;">
+      <div class="mat-name">System Founded</div>
+      <div class="mat-stat">2018 · 6+ years of operating history as a franchise</div>
+    </div>
+    <div class="mat-card" style="border-left-color:#1a7a4a;">
+      <div class="mat-name">Total Locations (FDD period)</div>
+      <div class="mat-stat">71 units · Grown from 18 in 2021 to 71 by end of measurement period</div>
+    </div>
+    <div class="mat-card" style="border-left-color:#1a7a4a;">
+      <div class="mat-name">Data Set Quality</div>
+      <div class="mat-stat">22 units with full P&L of 34 qualifying · Moderate data set</div>
+    </div>
+    <div class="mat-card" style="border-left-color:#b86e00;">
+      <div class="mat-name">Newest Cohort (excluded)</div>
+      <div class="mat-stat">37 units opened after measurement period · Performance unknown · Ask franchisor</div>
+    </div>
+    <div class="mat-card" style="border-left-color:#1a7a4a;">
+      <div class="mat-name">System Closures (3 yrs)</div>
+      <div class="mat-stat" style="color:#1a7a4a;font-weight:700;">Zero closures · Zero terminations · Zero non-renewals</div>
+    </div>
+    <div class="mat-card" style="border-left-color:#452e80;">
+      <div class="mat-name">Franchisor Credibility</div>
+      <div class="mat-stat">Profitable · Clean audit · No going concern · Positive cash flow trend</div>
+    </div>
+  </div>
+</div>
+
+<!-- CREDIBILITY / LIABILITIES -->
+<div class="sec">
+  <div class="sec-lbl">Franchisor Credibility & Disclosed Liabilities (Item 21)</div>
+  <table>
+    <tr><th class="th-dark">Item</th><th class="th-dark">Status</th><th class="th-dark">Source</th></tr>
+    <tr><td class="tdm">Franchisor profitability</td><td style="color:#1a7a4a;font-weight:700;">Profitable — confirmed in FDD</td><td>Item 21</td></tr>
+    <tr><td class="tdm">Going concern note</td><td style="color:#1a7a4a;font-weight:700;">None disclosed</td><td>Item 21</td></tr>
+    <tr><td class="tdm">Financial restatements</td><td style="color:#1a7a4a;font-weight:700;">None disclosed</td><td>Item 21</td></tr>
+    <tr><td class="tdm">Litigation / judgments against franchisor</td><td style="color:#1a7a4a;font-weight:700;">None material disclosed</td><td>Item 3</td></tr>
+    <tr><td class="tdm">Bankruptcies (principals or franchisor)</td><td style="color:#1a7a4a;font-weight:700;">None disclosed</td><td>Item 4</td></tr>
+    <tr><td class="tdm">Audit status</td><td style="color:#1a7a4a;font-weight:700;">Audited financials present</td><td>Item 21</td></tr>
+    <tr><td class="tdm">Debt level of franchisor</td><td style="color:#b86e00;font-weight:700;">Not separately disclosed — review audited statements</td><td>Item 21 / Exhibit</td></tr>
+  </table>
+</div>
+
+<!-- FLAGS -->
+<div class="sec">
+  <div class="sec-lbl">Green Flags & Red Flags</div>
+  <div class="flag-grid">
+    <div class="flag-card fg">
+      <div class="flag-title">✓ Green Flags</div>
+      <ul class="flag-list">
+        <li>Zero terminations in 3 years across a growing system — rare and significant</li>
+        <li>Recurring membership revenue ($40–$60/month) supports debt service predictability</li>
+        <li>4-unit development agreement reduces per-unit fee by 40% — economically optimal for multi-unit operators</li>
+        <li>13.8% median NOI is strong relative to industry benchmarks for service franchises</li>
+        <li>Profitable franchisor with clean audit and no going concern notes</li>
+        <li>Semi-absentee ownership explicitly permitted with GM structure</li>
+        <li>Rapid and consistent growth (18→34→71 units) signals demand and operational scalability</li>
+      </ul>
+    </div>
+    <div class="flag-card fr">
+      <div class="flag-title">⚑ Red Flags / Watch Items</div>
+      <ul class="flag-list">
+        <li>Bottom quartile NOI of 1.2% ($4K) — wide performance spread; GM quality appears to be the primary differentiator</li>
+        <li>Only 22 of 71 units reported full P&L — data set covers 31% of system; not fully representative</li>
+        <li>No year-over-year same-store sales comparison available in this FDD</li>
+        <li>Base-case single unit DSCR of 1.15x is below SBA preferred 1.25x — may require top-half performance for clean loan approval</li>
+        <li>Renewal terms at franchisor discretion (Item 23) — conditions for renewal are not automatic</li>
+        <li>Territory availability in Leonard's target markets cannot be confirmed from FDD alone</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="ftr"><p>Franchise Nova Financial Analysis · BLK GRVTY · June 2026 · Based on Scenthound 2024 FDD (FranChimp) · For internal FN use only · Not financial, legal, or investment advice · All figures derived from FDD disclosures</p></div>
+</div>
+</body>
+</html>
