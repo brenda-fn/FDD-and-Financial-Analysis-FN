@@ -18,7 +18,7 @@ jobs:
         run: |
           echo "=== STARTING HUBSPOT NOTE POST ==="
 
-          # Find the most recently added JSON in pending_notes/
+          # Find most recent JSON in pending_notes/
           NOTE_FILE=$(ls -t pending_notes/*.json 2>/dev/null | head -1)
           echo "Note file: $NOTE_FILE"
 
@@ -27,19 +27,16 @@ jobs:
             exit 1
           fi
 
-          echo "File contents:"
-          cat "$NOTE_FILE"
-
           CONTACT_EMAIL=$(jq -r '.contact_email' "$NOTE_FILE")
           NOTE_BODY=$(jq -r '.note_body' "$NOTE_FILE")
+          LANDSCAPE_URL=$(jq -r '.candidate_link' "$NOTE_FILE")
           echo "Contact email: $CONTACT_EMAIL"
+          echo "Landscape URL: $LANDSCAPE_URL"
 
-          # Check token
           if [ -z "$HS_TOKEN" ]; then
             echo "ERROR: HUBSPOT_TOKEN secret not set"
             exit 1
           fi
-          echo "Token: present (${#HS_TOKEN} chars)"
 
           # Find contact in HubSpot
           echo "=== SEARCHING HUBSPOT ==="
@@ -52,7 +49,6 @@ jobs:
           HTTP_STATUS=$(echo "$SEARCH_RESP" | grep "HTTP_STATUS:" | cut -d: -f2)
           BODY=$(echo "$SEARCH_RESP" | grep -v "HTTP_STATUS:")
           echo "Search HTTP status: $HTTP_STATUS"
-          echo "Search body: $BODY"
 
           CONTACT_ID=$(echo "$BODY" | jq -r '.results[0].id // empty')
           echo "Contact ID: $CONTACT_ID"
@@ -62,7 +58,7 @@ jobs:
             exit 1
           fi
 
-          # Post note
+          # Step 1 — Post note
           echo "=== POSTING NOTE ==="
           TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%S.000Z")
           NOTE_JSON=$(echo "$NOTE_BODY" | jq -Rs .)
@@ -76,12 +72,35 @@ jobs:
           NOTE_STATUS=$(echo "$NOTE_RESP" | grep "HTTP_STATUS:" | cut -d: -f2)
           NOTE_BODY_RESP=$(echo "$NOTE_RESP" | grep -v "HTTP_STATUS:")
           echo "Note HTTP status: $NOTE_STATUS"
-          echo "Note response: $NOTE_BODY_RESP"
 
           NOTE_ID=$(echo "$NOTE_BODY_RESP" | jq -r '.id // empty')
           if [ -z "$NOTE_ID" ]; then
-            echo "ERROR: Note creation failed — see response above"
+            echo "ERROR: Note creation failed"
+            echo "Response: $NOTE_BODY_RESP"
             exit 1
           fi
+          echo "✓ Note posted — ID: $NOTE_ID"
 
-          echo "=== SUCCESS: Note ID $NOTE_ID posted to contact $CONTACT_ID ==="
+          # Step 2 — Update Landscape URL property
+          echo "=== UPDATING LANDSCAPE URL PROPERTY ==="
+          PROP_RESP=$(curl -s -w "\nHTTP_STATUS:%{http_code}" -X PATCH \
+            "https://api.hubapi.com/crm/v3/objects/contacts/$CONTACT_ID" \
+            -H "Authorization: Bearer $HS_TOKEN" \
+            -H "Content-Type: application/json" \
+            -d "{\"properties\":{\"landscape_url\":\"$LANDSCAPE_URL\"}}")
+
+          PROP_STATUS=$(echo "$PROP_RESP" | grep "HTTP_STATUS:" | cut -d: -f2)
+          PROP_BODY=$(echo "$PROP_RESP" | grep -v "HTTP_STATUS:")
+          echo "Property update HTTP status: $PROP_STATUS"
+          echo "Property response: $PROP_BODY"
+
+          if [ "$PROP_STATUS" = "200" ]; then
+            echo "✓ Landscape URL property updated"
+          else
+            echo "WARNING: Property update failed — check property name matches HubSpot exactly"
+          fi
+
+          echo "=== ALL DONE ==="
+          echo "  Note ID: $NOTE_ID"
+          echo "  Contact ID: $CONTACT_ID"
+          echo "  Landscape URL: $LANDSCAPE_URL"
