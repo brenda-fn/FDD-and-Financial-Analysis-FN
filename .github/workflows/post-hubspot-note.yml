@@ -1,0 +1,59 @@
+name: Post HubSpot Note
+
+on:
+  push:
+    paths:
+      - 'pending_notes/**.json'
+
+jobs:
+  post-note:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Post note to HubSpot
+        env:
+          HS_TOKEN: ${{ secrets.HUBSPOT_TOKEN }}
+        run: |
+          NOTE_FILE=$(git diff-tree --no-commit-id -r --name-only ${{ github.sha }} | grep 'pending_notes/' | head -1)
+          echo "Processing: $NOTE_FILE"
+          if [ -z "$NOTE_FILE" ]; then
+            echo "No note file found"
+            exit 0
+          fi
+
+          CONTACT_EMAIL=$(jq -r '.contact_email' "$NOTE_FILE")
+          NOTE_BODY=$(jq -r '.note_body' "$NOTE_FILE")
+          echo "Contact: $CONTACT_EMAIL"
+
+          # Find contact in HubSpot
+          SEARCH_RESP=$(curl -s -X POST "https://api.hubapi.com/crm/v3/objects/contacts/search" \
+            -H "Authorization: Bearer $HS_TOKEN" \
+            -H "Content-Type: application/json" \
+            -d "{\"filterGroups\":[{\"filters\":[{\"propertyName\":\"email\",\"operator\":\"EQ\",\"value\":\"$CONTACT_EMAIL\"}]}],\"properties\":[\"email\",\"firstname\",\"lastname\"]}")
+
+          CONTACT_ID=$(echo "$SEARCH_RESP" | jq -r '.results[0].id')
+          echo "Contact ID: $CONTACT_ID"
+
+          if [ "$CONTACT_ID" = "null" ] || [ -z "$CONTACT_ID" ]; then
+            echo "ERROR: Contact not found for $CONTACT_EMAIL"
+            exit 1
+          fi
+
+          # Post note
+          TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%S.000Z")
+          NOTE_RESP=$(curl -s -X POST "https://api.hubapi.com/crm/v3/objects/notes" \
+            -H "Authorization: Bearer $HS_TOKEN" \
+            -H "Content-Type: application/json" \
+            -d "{\"properties\":{\"hs_timestamp\":\"$TIMESTAMP\",\"hs_note_body\":$(echo "$NOTE_BODY" | jq -Rs .)},\"associations\":[{\"to\":{\"id\":\"$CONTACT_ID\"},\"types\":[{\"associationCategory\":\"HUBSPOT_DEFINED\",\"associationTypeId\":202}]}]}")
+
+          NOTE_ID=$(echo "$NOTE_RESP" | jq -r '.id')
+          echo "Note response: $NOTE_RESP"
+
+          if [ "$NOTE_ID" = "null" ] || [ -z "$NOTE_ID" ]; then
+            echo "ERROR: Note creation failed"
+            exit 1
+          fi
+
+          echo "SUCCESS: Note posted — ID: $NOTE_ID"
