@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Franchise Nova — Franchise Systems Worth Exploring</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Lato', sans-serif;
+  background: #e8eaf0;
+  color: #15131f;
+  line-height: 1.6;
+  padding: 40px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+.doc { max-width: 860px; margin: 0 auto; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 32px rgba(0,0,0,0.12); }
+
+/* ── HEADER ── */
+.header { background: linear-gradient(135deg,#05040a,#0d0a1c,#161033); padding: 34px 44px 28px; position: relative; overflow: hidden; }
+.header::before { content:''; position:absolute; top:-80px; right:-80px; width:360px; height:360px; background:radial-gradient(circle,rgba(102,76,169,0.35) 0%,transparent 65%); pointer-events:none; }
+.header::after  { content:''; position:absolute; bottom:-60px; left:-60px; width:280px; height:280px; background:radial-gradient(circle,rgba(0,174,239,0.18) 0%,transparent 65%); pointer-events:none; }
+.h-logo { font-family:'Montserrat',sans-serif; font-weight:900; font-size:10px; letter-spacing:.18em; color:rgba(255,255,255,0.38); margin-bottom:14px; }
+.h-eye  { font-family:'Montserrat',sans-serif; font-weight:700; font-size:9px; letter-spacing:.28em; text-transform:uppercase; color:#664ca9; margin-bottom:8px; }
+.h-name { font-family:'Montserrat',sans-serif; font-weight:900; font-size:28px; color:#fff; margin-bottom:8px; line-height:1.1; }
+.h-meta { font-size:12.5px; color:#b0aed0; }
+.h-meta strong { color:#e1e3ee; }
+
+/* ── SECTION ── */
+.section { padding: 24px 44px; border-bottom: 1px solid #e8eaf0; }
+.section:last-of-type { border-bottom: none; }
+.sec-label { font-family:'Montserrat',sans-serif; font-weight:800; font-size:9px; letter-spacing:.22em; text-transform:uppercase; color:#452e80; margin-bottom:14px; }
+
+/* ── INTRO ── */
+.intro-card { background:#f5f5fa; border-left:3px solid #00aeef; border-radius:0 7px 7px 0; padding:14px 18px; margin-bottom:6px; font-size:13px; color:#333; line-height:1.65; }
+
+/* ── LANDSCAPE CARDS ── */
+.ls-card { border:1px solid #e8eaf0; border-radius:9px; overflow:hidden; background:#fafafa; }
+.ls-card-top { padding:14px 18px 10px; border-bottom:1px solid #e8eaf0; }
+.ls-card-header { display:flex; justify-content:space-between; align-items:flex-start; gap:8px; margin-bottom:8px; }
+.ls-name { font-family:'Montserrat',sans-serif; font-weight:800; font-size:14px; color:#15131f; }
+.ls-cat  { font-family:'Montserrat',sans-serif; font-weight:700; font-size:8px; letter-spacing:.08em; text-transform:uppercase; padding:3px 10px; border-radius:999px; white-space:nowrap; flex-shrink:0; }
+.ls-health { background:rgba(69,46,128,0.1); color:#452e80; }
+.ls-edu    { background:rgba(184,110,0,0.12); color:#7a4800; }
+.ls-why  { font-size:13px; color:#444; line-height:1.65; }
+.ls-card-bottom { padding:10px 18px; background:#f0eefa; display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.ls-stat { display:flex; flex-direction:column; gap:2px; }
+.ls-stat-label { font-family:'Montserrat',sans-serif; font-weight:700; font-size:8px; letter-spacing:.08em; text-transform:uppercase; color:#888; }
+.ls-stat-val { font-size:12px; color:#15131f; font-weight:700; line-height:1.3; }
+.ls-stat-val.good  { color:#1a7a4a; }
+.ls-stat-val.warn  { color:#b86e00; }
+.ls-stat-val.note  { color:#452e80; }
+.ls-tags { padding:8px 18px 12px; display:flex; flex-wrap:wrap; gap:6px; }
+.ls-tag  { font-size:10px; color:#555; background:#eeedf8; border-radius:5px; padding:3px 9px; font-family:'Montserrat',sans-serif; font-weight:700; }
+.ls-tag.sba   { color:#1a7a4a; background:#eaf6ef; }
+.ls-tag.geo   { color:#00709a; background:#e8f7fd; }
+.ls-tag.recur { color:#452e80; background:#ede9fa; }
+.ls-tag.warn  { color:#b86e00; background:#fdf5e6; }
+
+/* ── RANK HEADER — restyled for candidate ── */
+.rank-bar { padding:6px 18px; display:flex; align-items:center; gap:10px; }
+.rank-num { font-family:'Montserrat',sans-serif; font-weight:900; font-size:10px; color:#fff; }
+.rank-note { font-size:10px; color:rgba(255,255,255,0.6); }
+
+/* ── DISCLAIMER ── */
+.disclaimer { background:#f5f5fa; border-top:1px solid #e8eaf0; padding:18px 44px; }
+.disclaimer p { font-size:11.5px; color:#888; line-height:1.65; }
+.disclaimer strong { color:#555; }
+
+/* ── FOOTER ── */
+.doc-footer { background:#0d0a1c; padding:14px 44px; }
+.footer-main { font-size:11px; color:#9a98b4; }
+
+@media print {
+  body { background:#fff; padding:0; }
+  .doc { box-shadow:none; border-radius:0; }
+  .header, .doc-footer { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+}
+@media (max-width:640px) {
+  .section { padding: 18px 20px; }
+  .ls-card-bottom { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+<div class="doc">
+
+<header class="header">
+  <div class="h-logo">BLK GRVTY  /  FRANCHISE NOVA</div>
+  <div class="h-eye">Prepared for Your Review</div>
+  <h1 class="h-name">Franchise Systems Worth Exploring</h1>
+  <p class="h-meta"><strong>Brenda Reid</strong> &nbsp;·&nbsp; Health, Wellness &amp; Fitness · Education &amp; Childcare &nbsp;·&nbsp; Target: Dallas-Fort Worth / North Texas</p>
+</header>
+
+<div class="section">
+  <div class="sec-label">About This List</div>
+  <div class="intro-card">
+    Based on the sectors you selected and your target geography, we put together a starting list of franchise systems worth researching as you continue your journey. These systems were identified based on publicly available information — their territory availability, revenue model, ownership structure, and fit with your goals.<br><br>
+    This is a starting point for your own research and conversation, not a formal recommendation. Your Nova Guide will walk through these with you on your Discovery Call. Any system you want to explore further will go through Franchise Nova's full FDD analysis process before any decisions are made.
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-label">Systems Worth Exploring — Ranked by Fit</div>
+  <div style="font-size:12.5px;color:#666;margin-bottom:16px;">Systems are ranked based on how well they match your sectors, ownership model preference, geography, and FN's focus on recurring revenue. <strong>Est. Investment</strong> = estimated total cost to open one location (franchise fee + build-out + equipment + working capital) — not what you earn. <strong>B2C</strong> = your customers are individual consumers.</div>
+
+  <div style="display:flex;flex-direction:column;gap:14px;">
+
+    <div class="ls-card">
+      <div class="rank-bar" style="background:#452e80;">
+        <span class="rank-num">01</span>
+        <span class="rank-note">Strongest territory availability match for your target area</span>
+      </div>
+      <div class="ls-card-top">
+        <div class="ls-card-header">
+          <div class="ls-name">Snap Fitness</div>
+          <span class="ls-cat ls-health">Health, Wellness &amp; Fitness</span>
+        </div>
+        <p class="ls-why"><strong>B2C · Monthly membership model.</strong> 24/7 access gym franchise with over 2,000 locations nationwide. The franchisor's own development page lists Frisco, Allen, and McKinney as available franchise territories — one of the clearest territory signals on this list. Membership-based recurring revenue. Semi-absentee ownership supported with a General Manager. Most multi-unit operators own 3+ clubs. SBA financing confirmed.</p>
+      </div>
+      <div class="ls-card-bottom">
+        <div class="ls-stat"><span class="ls-stat-label">Est. Investment / Unit</span><span class="ls-stat-val note">$200K–$400K</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">Revenue Model</span><span class="ls-stat-val good">Monthly membership · Recurring ✓</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">SBA Friendly</span><span class="ls-stat-val good">Yes — confirmed</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">System Size</span><span class="ls-stat-val">2,000+ locations · Established</span></div>
+      </div>
+      <div class="ls-tags">
+        <span class="ls-tag geo">Frisco, Allen, McKinney — open territories listed by franchisor</span>
+        <span class="ls-tag recur">Recurring membership</span>
+        <span class="ls-tag sba">SBA-friendly ✓</span>
+        <span class="ls-tag">Semi-absentee ✓</span>
+      </div>
+    </div>
+
+    <div class="ls-card">
+      <div class="rank-bar" style="background:#282560;">
+        <span class="rank-num">02</span>
+        <span class="rank-note">DFW is one of their top growth markets · First-mover opportunity in outer suburbs</span>
+      </div>
+      <div class="ls-card-top">
+        <div class="ls-card-header">
+          <div class="ls-name">JETSET Pilates</div>
+          <span class="ls-cat ls-health">Health, Wellness &amp; Fitness</span>
+        </div>
+        <p class="ls-why"><strong>B2C · Monthly membership model.</strong> Modern reformer Pilates franchise, franchising since 2022 and growing fast. DFW is explicitly named as one of their top momentum clusters nationally, with a Dallas training facility planned for 2026. Locations in McKinney and Preston Hollow already open — outer suburbs like Prosper, Celina, and Argyle represent first-mover territory. Average franchise partner holds 2.5 studios. Semi-absentee with a General Manager. Territories based on 30,000 population minimum.</p>
+      </div>
+      <div class="ls-card-bottom">
+        <div class="ls-stat"><span class="ls-stat-label">Est. Investment / Unit</span><span class="ls-stat-val note">$525K–$750K</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">Revenue Model</span><span class="ls-stat-val good">Monthly membership · Recurring ✓</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">Avg. Studios per Owner</span><span class="ls-stat-val good">2.5 — multi-unit friendly</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">System Size</span><span class="ls-stat-val">270+ open or in dev · Growing</span></div>
+      </div>
+      <div class="ls-tags">
+        <span class="ls-tag geo">DFW top growth cluster · Prosper / Celina / Argyle first-mover</span>
+        <span class="ls-tag recur">Recurring membership</span>
+        <span class="ls-tag">Semi-absentee ✓</span>
+        <span class="ls-tag">Multi-unit native</span>
+      </div>
+    </div>
+
+    <div class="ls-card">
+      <div class="rank-bar" style="background:#282560;">
+        <span class="rank-num">03</span>
+        <span class="rank-note">Best SBA profile in any franchise category · Texas expansion confirmed</span>
+      </div>
+      <div class="ls-card-top">
+        <div class="ls-card-header">
+          <div class="ls-name">The Goddard School</div>
+          <span class="ls-cat ls-edu">Education &amp; Childcare</span>
+        </div>
+        <p class="ls-why"><strong>B2C · Recurring weekly tuition from families.</strong> Premium early childhood education for ages 6 weeks through 6 years. Average EBITDA of $546K for mature schools (2025 FDD disclosure). 0.0% SBA default rate — one of the strongest financing profiles of any franchise system in the country. Actively seeking Texas expansion. Childcare territories cover a 3–7 mile radius, meaning growth areas like Prosper, Celina, Anna, and Little Elm are realistic open zones. Over 115 multi-unit owners nationally.</p>
+      </div>
+      <div class="ls-card-bottom">
+        <div class="ls-stat"><span class="ls-stat-label">Est. Investment / Unit</span><span class="ls-stat-val warn">$650K–$1.1M+</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">Revenue Model</span><span class="ls-stat-val good">Recurring weekly tuition ✓</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">Avg. EBITDA (mature schools)</span><span class="ls-stat-val good">$546K — 2025 FDD</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">SBA Default Rate</span><span class="ls-stat-val good">0.0% — best in class</span></div>
+      </div>
+      <div class="ls-tags">
+        <span class="ls-tag geo">Texas expansion active · Outer suburb zones open</span>
+        <span class="ls-tag recur">Recurring weekly tuition</span>
+        <span class="ls-tag sba">SBA-friendly ✓ — 0% default rate</span>
+        <span class="ls-tag warn">Higher investment · Verify your specific zone</span>
+      </div>
+    </div>
+
+    <div class="ls-card">
+      <div class="rank-bar" style="background:#282560;">
+        <span class="rank-num">04</span>
+        <span class="rank-note">Actively opening new DFW locations · Outer growth corridor wide open</span>
+      </div>
+      <div class="ls-card-top">
+        <div class="ls-card-header">
+          <div class="ls-name">The Learning Experience</div>
+          <span class="ls-cat ls-edu">Education &amp; Childcare</span>
+        </div>
+        <p class="ls-why"><strong>B2C · Recurring weekly tuition from families.</strong> National early childhood education franchise for ages 6 weeks through 6 years. Six new DFW locations opened in 2025, with Argyle opening in 2026 — the franchisor is actively awarding territory in the DFW area right now. Over 60 Texas locations already operating. The northwest DFW growth corridor — Argyle, Little Elm, Prosper, Celina — represents a real first-mover window as families continue migrating into these suburbs.</p>
+      </div>
+      <div class="ls-card-bottom">
+        <div class="ls-stat"><span class="ls-stat-label">Est. Investment / Unit</span><span class="ls-stat-val warn">$500K–$900K</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">Revenue Model</span><span class="ls-stat-val good">Recurring weekly tuition ✓</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">Texas Presence</span><span class="ls-stat-val good">60+ locations · Actively expanding</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">DFW Expansion</span><span class="ls-stat-val good">6 new locations 2025 · Argyle 2026</span></div>
+      </div>
+      <div class="ls-tags">
+        <span class="ls-tag geo">Argyle, Little Elm, Prosper, Celina — active growth corridor</span>
+        <span class="ls-tag recur">Recurring weekly tuition</span>
+        <span class="ls-tag warn">Higher investment · Verify your zone</span>
+      </div>
+    </div>
+
+    <div class="ls-card">
+      <div class="rank-bar" style="background:#282560;">
+        <span class="rank-num">05</span>
+        <span class="rank-note">Texas expansion confirmed · Lowest royalty in childcare · Built for multi-unit owners</span>
+      </div>
+      <div class="ls-card-top">
+        <div class="ls-card-header">
+          <div class="ls-name">Lightbridge Academy</div>
+          <span class="ls-cat ls-edu">Education &amp; Childcare</span>
+        </div>
+        <p class="ls-why"><strong>B2C · Recurring weekly tuition from families.</strong> Early childhood education franchise for ages 6 weeks through pre-K. Texas expansion confirmed with a Rockwall County location breaking ground. Prime territories available across the U.S. The lowest royalty fee in the childcare franchise category at 4% — which means more of your revenue stays in your business. $2.6M average unit volume and $411K EBITDA. 75% of franchise owners operate multiple locations. No prior education experience required.</p>
+      </div>
+      <div class="ls-card-bottom">
+        <div class="ls-stat"><span class="ls-stat-label">Est. Investment / Unit</span><span class="ls-stat-val warn">$700K–$1M+</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">Revenue Model</span><span class="ls-stat-val good">Recurring weekly tuition ✓</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">Avg. Unit Volume / EBITDA</span><span class="ls-stat-val good">$2.6M AUV · $411K EBITDA</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">Multi-Unit Owners</span><span class="ls-stat-val good">75% of franchisees</span></div>
+      </div>
+      <div class="ls-tags">
+        <span class="ls-tag geo">Texas expansion confirmed · Prime territories available</span>
+        <span class="ls-tag recur">Recurring weekly tuition</span>
+        <span class="ls-tag sba">SBA-friendly ✓</span>
+        <span class="ls-tag">Lowest royalty in category — 4%</span>
+        <span class="ls-tag warn">Higher investment · Verify DFW zones</span>
+      </div>
+    </div>
+
+    <div class="ls-card">
+      <div class="rank-bar" style="background:#282560;">
+        <span class="rank-num">06</span>
+        <span class="rank-note">Global brand recognition · No confirmed locations in your target suburbs</span>
+      </div>
+      <div class="ls-card-top">
+        <div class="ls-card-header">
+          <div class="ls-name">Anytime Fitness</div>
+          <span class="ls-cat ls-health">Health, Wellness &amp; Fitness</span>
+        </div>
+        <p class="ls-why"><strong>B2C · Monthly membership model.</strong> One of the most recognized 24/7 gym franchises in the world with over 5,000 locations. Membership-based recurring revenue. Strong SBA financing track record. Semi-absentee ownership with a General Manager. No confirmed locations found in your specific target suburbs — which means there may be a first-mover opportunity to bring a nationally recognized brand into your market before anyone else does. Franchise actively awards Texas territories.</p>
+      </div>
+      <div class="ls-card-bottom">
+        <div class="ls-stat"><span class="ls-stat-label">Est. Investment / Unit</span><span class="ls-stat-val note">$150K–$400K</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">Revenue Model</span><span class="ls-stat-val good">Monthly membership · Recurring ✓</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">SBA Friendly</span><span class="ls-stat-val good">Yes — strong track record</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">System Size</span><span class="ls-stat-val">5,000+ locations · Global brand</span></div>
+      </div>
+      <div class="ls-tags">
+        <span class="ls-tag geo">Texas territories active · No locations found in target suburbs</span>
+        <span class="ls-tag recur">Recurring membership</span>
+        <span class="ls-tag sba">SBA-friendly ✓</span>
+        <span class="ls-tag">Semi-absentee ✓</span>
+        <span class="ls-tag warn">Verify specific suburb availability</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="disclaimer">
+  <p><strong>Important:</strong> This list is based on publicly available information only. Franchise Nova has not reviewed the Franchise Disclosure Document (FDD) for any of these systems on your behalf. Investment figures are estimates — actual costs vary by location and market. Territory availability must be confirmed directly with each franchisor. This document is a starting point for your research and conversation with your Nova Guide, not a recommendation to invest in any specific franchise system. All investment decisions should be made after full FDD review, legal counsel, and financial due diligence.</p>
+</div>
+
+<div class="doc-footer">
+  <p class="footer-main">Franchise Nova &nbsp;·&nbsp; A BLK GRVTY Initiative &nbsp;·&nbsp; Prepared for Brenda Reid &nbsp;·&nbsp; June 2026</p>
+</div>
+
+</div>
+</body>
+</html>
