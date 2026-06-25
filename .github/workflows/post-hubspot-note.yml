@@ -3,7 +3,7 @@ name: Post HubSpot Note
 on:
   push:
     paths:
-      - 'pending_notes/**.json'
+      - 'pending_notes/FN_current_note.json'
 
 jobs:
   post-note:
@@ -18,18 +18,14 @@ jobs:
         run: |
           echo "=== STARTING HUBSPOT NOTE POST ==="
 
-          # Find most recent JSON in pending_notes/
-          NOTE_FILE=$(ls -t pending_notes/*.json 2>/dev/null | head -1)
-          echo "Note file: $NOTE_FILE"
-
-          if [ -z "$NOTE_FILE" ]; then
-            echo "ERROR: No JSON files found in pending_notes/"
-            exit 1
-          fi
+          NOTE_FILE="pending_notes/FN_current_note.json"
+          echo "Reading: $NOTE_FILE"
+          cat "$NOTE_FILE"
 
           CONTACT_EMAIL=$(jq -r '.contact_email' "$NOTE_FILE")
           NOTE_BODY=$(jq -r '.note_body' "$NOTE_FILE")
           LANDSCAPE_URL=$(jq -r '.candidate_link' "$NOTE_FILE")
+
           echo "Contact email: $CONTACT_EMAIL"
           echo "Landscape URL: $LANDSCAPE_URL"
 
@@ -95,9 +91,10 @@ jobs:
           echo "Property response: $PROP_BODY"
 
           if [ "$PROP_STATUS" = "200" ]; then
-            echo "✓ Landscape URL property updated"
+            echo "✓ Landscape URL property updated successfully"
           else
-            echo "WARNING: Property update failed — check property name matches HubSpot exactly"
+            echo "ERROR: Property update failed"
+            exit 1
           fi
 
           echo "=== ALL DONE ==="
