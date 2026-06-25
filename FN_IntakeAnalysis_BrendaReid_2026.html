@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Franchise Nova — Brenda Reid · Candidate Readiness</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Lato', sans-serif;
+  background: #e8eaf0;
+  color: #15131f;
+  line-height: 1.6;
+  padding: 40px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.doc { max-width: 880px; margin: 0 auto; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 32px rgba(0,0,0,0.12); }
+
+/* ── HEADER ── */
+.header { background: linear-gradient(135deg,#05040a,#0d0a1c,#161033); padding: 34px 44px 28px; position: relative; overflow: hidden; }
+.header::before { content:''; position:absolute; top:-80px; right:-80px; width:360px; height:360px; background:radial-gradient(circle,rgba(102,76,169,0.38) 0%,transparent 65%); pointer-events:none; }
+.header::after  { content:''; position:absolute; bottom:-60px; left:-60px; width:280px; height:280px; background:radial-gradient(circle,rgba(0,174,239,0.2) 0%,transparent 65%); pointer-events:none; }
+.h-logo { font-family:'Montserrat',sans-serif; font-weight:900; font-size:10px; letter-spacing:.18em; color:rgba(255,255,255,0.38); margin-bottom:14px; }
+.h-eye  { font-family:'Montserrat',sans-serif; font-weight:700; font-size:9px; letter-spacing:.28em; text-transform:uppercase; color:#664ca9; margin-bottom:8px; }
+.h-name { font-family:'Montserrat',sans-serif; font-weight:900; font-size:36px; color:#fff; margin-bottom:6px; line-height:1.05; }
+.h-meta { font-size:13px; color:#b0aed0; margin-bottom:14px; }
+.h-meta strong { color:#e1e3ee; }
+.h-note { font-size:11px; color:rgba(255,255,255,0.35); font-style:italic; }
+
+/* ── CLASSIFICATION BANNER ── */
+.class-banner { display:flex; align-items:center; gap:22px; padding:22px 44px; background:linear-gradient(90deg,rgba(102,76,169,0.1),transparent 75%); border-bottom:1px solid #e8eaf0; }
+.badge { width:78px; height:78px; border-radius:50%; background:radial-gradient(circle at 45% 40%,#664ca9,#452e80 55%,#282560 80%); box-shadow:0 0 0 5px rgba(102,76,169,0.18),0 0 24px rgba(102,76,169,0.4); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.badge span { font-family:'Montserrat',sans-serif; font-weight:900; font-size:12px; color:#fff; letter-spacing:.04em; }
+.class-info h2 { font-family:'Montserrat',sans-serif; font-weight:900; font-size:21px; color:#15131f; margin-bottom:4px; }
+.class-info h2 em { color:#664ca9; font-style:normal; }
+.class-info p { font-size:13.5px; color:#555; max-width:46ch; }
+.conf-pill { display:inline-block; margin-top:7px; font-family:'Montserrat',sans-serif; font-weight:700; font-size:9.5px; letter-spacing:.1em; text-transform:uppercase; color:#664ca9; border:1px solid #664ca9; border-radius:999px; padding:3px 11px; }
+
+/* ── SECTIONS ── */
+.section { padding:24px 44px; border-bottom:1px solid #e8eaf0; }
+.section:last-of-type { border-bottom:none; }
+.sec-label { font-family:'Montserrat',sans-serif; font-weight:800; font-size:9px; letter-spacing:.22em; text-transform:uppercase; color:#452e80; margin-bottom:16px; }
+
+/* ── TWO AXIS ── */
+.axis-grid { display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:start; }
+.score-wrap { display:flex; align-items:center; gap:18px; }
+.ring-outer { width:96px; height:96px; border-radius:50%; background:conic-gradient(#664ca9 calc(var(--pct)*1%),#e8eaf0 0); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.ring-inner { width:74px; height:74px; border-radius:50%; background:#fff; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+.ring-num { font-family:'Montserrat',sans-serif; font-weight:900; font-size:26px; color:#15131f; line-height:1; }
+.ring-den { font-size:10px; color:#aaa; margin-top:2px; }
+.score-meta h4 { font-family:'Montserrat',sans-serif; font-weight:800; font-size:13px; color:#15131f; margin-bottom:10px; }
+.lift-lbl { font-family:'Montserrat',sans-serif; font-weight:800; font-size:10px; color:#452e80; margin-bottom:6px; }
+.pills { display:flex; gap:6px; margin-bottom:8px; }
+.pill { font-family:'Montserrat',sans-serif; font-weight:700; font-size:9.5px; letter-spacing:.05em; text-transform:uppercase; padding:3px 10px; border-radius:999px; background:#e8eaf0; color:#888; }
+.pill.on { background:#452e80; color:#fff; }
+.score-note { font-size:12.5px; color:#666; line-height:1.55; }
+.matrix { display:grid; grid-template-columns:52px repeat(3,1fr); grid-template-rows:auto repeat(3,36px); gap:4px; font-size:10px; }
+.m-corner {}
+.m-colh { font-family:'Montserrat',sans-serif; font-weight:700; text-transform:uppercase; color:#aaa; text-align:center; font-size:9px; padding-bottom:4px; display:flex; align-items:flex-end; justify-content:center; }
+.m-rowh { font-family:'Montserrat',sans-serif; font-weight:700; text-transform:uppercase; color:#aaa; font-size:9px; display:flex; align-items:center; justify-content:flex-end; padding-right:5px; }
+.m-cell { border-radius:5px; position:relative; }
+.m-neb  { background:rgba(69,46,128,0.15); }
+.m-nova { background:rgba(102,76,169,0.18); }
+.m-sn   { background:rgba(0,174,239,0.16); }
+.m-here { outline:2px solid #664ca9; }
+.m-dot  { position:absolute; width:12px; height:12px; border-radius:50%; background:#664ca9; box-shadow:0 0 0 3px rgba(102,76,169,0.22),0 0 8px rgba(102,76,169,0.5); top:50%; left:50%; transform:translate(-50%,-50%); }
+.m-tag  { position:absolute; top:3px; left:5px; font-size:7px; font-weight:700; color:#666; text-transform:uppercase; font-family:'Montserrat',sans-serif; }
+.matrix-foot { font-size:10px; color:#aaa; text-align:center; margin-top:6px; }
+
+/* ── DIMENSIONS ── */
+.dims { display:flex; flex-direction:column; gap:16px; }
+.dim-top { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:5px; }
+.dim-name { font-family:'Montserrat',sans-serif; font-weight:700; font-size:13px; color:#15131f; }
+.dim-score { font-family:'Montserrat',sans-serif; font-weight:700; font-size:12px; color:#aaa; }
+.bar-track { height:7px; background:#e8eaf0; border-radius:999px; overflow:hidden; margin-bottom:5px; }
+.bar-fill  { height:100%; background:linear-gradient(90deg,#452e80,#664ca9); border-radius:999px; }
+.dim-note  { font-size:12.5px; color:#666; line-height:1.55; }
+
+/* ── SWOT ── */
+.swot-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.swot-card { border-radius:9px; padding:14px 16px; }
+.sw-s { background:#eaf6ef; border-left:3px solid #1a7a4a; }
+.sw-d { background:#f0eefa; border-left:3px solid #664ca9; }
+.sw-o { background:#f0eaf8; border-left:3px solid #452e80; }
+.sw-r { background:#fff0f4; border-left:3px solid #b1456b; }
+.swot-title { font-family:'Montserrat',sans-serif; font-weight:800; font-size:9.5px; letter-spacing:.1em; text-transform:uppercase; margin-bottom:9px; }
+.sw-s .swot-title { color:#1a7a4a; }
+.sw-d .swot-title { color:#664ca9; }
+.sw-o .swot-title { color:#452e80; }
+.sw-r .swot-title { color:#b1456b; }
+.swot-card ul { padding-left:14px; }
+.swot-card li { font-size:12.5px; margin-bottom:5px; line-height:1.5; color:#333; }
+
+/* ── TWO COL ── */
+.two-col { display:grid; grid-template-columns:1fr 1fr; gap:22px; }
+
+/* ── PATHWAY CARD ── */
+.pathway-card { background:linear-gradient(140deg,#0d0a1c,#1a1340); border-radius:9px; padding:18px 20px; color:#eceaf8; }
+.pathway-card .sec-label { color:#00aeef; }
+.pathway-primary { font-family:'Montserrat',sans-serif; font-weight:900; font-size:16px; color:#fff; margin-bottom:4px; }
+.pathway-backup  { font-size:12px; color:#b9b6d6; margin-bottom:12px; }
+.pathway-note    { font-size:12.5px; color:#d8d6ec; line-height:1.6; }
+
+/* ── ROADMAP ── */
+.roadmap { padding-left:0; list-style:none; }
+.roadmap li { display:flex; gap:12px; font-size:13px; color:#333; margin-bottom:10px; line-height:1.55; }
+.roadmap li .step-num { font-family:'Montserrat',sans-serif; font-weight:900; font-size:13px; color:#664ca9; min-width:18px; }
+.roadmap li strong { color:#15131f; }
+
+/* ── EXPECTATIONS ── */
+.expect-card { background:linear-gradient(90deg,rgba(69,46,128,0.07),transparent 85%); border-left:3px solid #452e80; border-radius:0 9px 9px 0; padding:15px 18px; }
+.expect-chips { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:10px; }
+.chip { font-family:'Montserrat',sans-serif; font-weight:800; font-size:11.5px; padding:5px 13px; border-radius:999px; }
+.chip-grey { background:#e8eaf0; color:#555; }
+.chip-dark { background:#452e80; color:#fff; }
+.arrow-sep { font-size:17px; color:#452e80; font-weight:700; }
+.expect-row { font-size:12.5px; color:#333; line-height:1.55; margin-bottom:6px; }
+.expect-key { font-family:'Montserrat',sans-serif; font-weight:800; font-size:9.5px; letter-spacing:.07em; text-transform:uppercase; color:#452e80; margin-right:5px; }
+
+/* ── ACTION CARD ── */
+.action-card { background:rgba(102,76,169,0.08); border-left:3px solid #664ca9; border-radius:0 8px 8px 0; padding:13px 17px; font-size:14px; color:#15131f; margin-bottom:16px; line-height:1.6; }
+.action-card strong { font-family:'Montserrat',sans-serif; }
+
+/* ── GAPS ── */
+.gaps-wrap { display:flex; flex-wrap:wrap; gap:8px; }
+.gap-tag { font-size:11.5px; background:#fff; border:1px dashed #b1456b; color:#8a3554; border-radius:6px; padding:5px 11px; }
+
+/* ══ PAGE 2 — DISCOVERY DAY PREP ══ */
+.ddp-header { background:linear-gradient(135deg,#05040a,#0d0a1c,#161033); padding:28px 44px 24px; position:relative; overflow:hidden; border-top:4px solid #00aeef; }
+.ddp-header::before { content:''; position:absolute; top:-50px; right:-50px; width:260px; height:260px; background:radial-gradient(circle,rgba(0,174,239,0.25) 0%,transparent 65%); pointer-events:none; }
+.ddp-eye   { font-family:'Montserrat',sans-serif; font-weight:700; font-size:9px; letter-spacing:.28em; text-transform:uppercase; color:#00aeef; margin-bottom:6px; }
+.ddp-title { font-family:'Montserrat',sans-serif; font-weight:900; font-size:22px; color:#fff; margin-bottom:4px; }
+.ddp-sub   { font-size:12px; color:#b0aed0; }
+
+/* ── INFO CARDS ── */
+.info-card { border:1px solid #e8eaf0; border-radius:9px; padding:16px 18px; background:#f9f9fc; }
+.info-card.cyan-accent   { border-left:4px solid #00aeef; }
+.info-card.purple-accent { border-left:4px solid #664ca9; }
+.info-card.egg-accent    { border-left:4px solid #452e80; }
+.info-card.amber-accent  { border-left:4px solid #b86e00; }
+.info-card.green-accent  { border-left:4px solid #1a7a4a; }
+.info-label { font-family:'Montserrat',sans-serif; font-weight:800; font-size:8.5px; letter-spacing:.15em; text-transform:uppercase; margin-bottom:8px; }
+.cyan-accent   .info-label { color:#00aeef; }
+.purple-accent .info-label { color:#664ca9; }
+.egg-accent    .info-label { color:#452e80; }
+.amber-accent  .info-label { color:#b86e00; }
+.green-accent  .info-label { color:#1a7a4a; }
+.info-text { font-size:13.5px; color:#333; line-height:1.65; }
+
+/* ── CAPITAL GRID ── */
+.cap-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+.cap-card { border-radius:8px; padding:12px 14px; background:#f5f5fa; border-top:3px solid #e8eaf0; }
+.cap-card.g { border-top-color:#1a7a4a; }
+.cap-card.a { border-top-color:#b86e00; }
+.cap-card.c { border-top-color:#00aeef; }
+.cap-label { font-family:'Montserrat',sans-serif; font-weight:700; font-size:8.5px; letter-spacing:.08em; text-transform:uppercase; color:#999; margin-bottom:5px; }
+.cap-val { font-family:'Montserrat',sans-serif; font-weight:800; font-size:13px; color:#15131f; line-height:1.35; }
+
+/* ── PREP NOTES ── */
+.prep-note { background:linear-gradient(135deg,#0d0a1c,#1a1340); border-radius:9px; padding:16px 18px; color:#eceaf8; margin-bottom:10px; }
+.prep-note-label { font-family:'Montserrat',sans-serif; font-weight:800; font-size:8.5px; letter-spacing:.15em; text-transform:uppercase; color:#00aeef; margin-bottom:8px; }
+.prep-note-text  { font-size:13px; color:#d8d6ec; line-height:1.65; }
+
+/* ── DISC QUESTIONS ── */
+.disc-qs { padding-left:0; list-style:none; }
+.disc-qs li { display:flex; gap:10px; font-size:13.5px; color:#333; margin-bottom:9px; line-height:1.6; }
+.disc-qs li::before { content:''; display:block; width:7px; height:7px; border-radius:50%; background:#00aeef; flex-shrink:0; margin-top:7px; }
+
+/* ── FOOTER ── */
+.doc-footer { background:#0d0a1c; padding:14px 44px; }
+.footer-main { font-size:11.5px; color:#9a98b4; margin-bottom:3px; line-height:1.6; }
+.footer-note { font-size:10.5px; color:#555; line-height:1.5; }
+
+/* ── LANDSCAPE ── */
+.landscape-intro { font-size:13px; color:#555; line-height:1.6; margin-bottom:10px; padding:12px 16px; background:#f5f5fa; border-left:3px solid #00aeef; border-radius:0 7px 7px 0; }
+.landscape-note  { font-size:11px; color:#aaa; font-style:italic; margin-bottom:16px; }
+.ls-grid { display:flex; flex-direction:column; gap:14px; }
+.ls-card { border:1px solid #e8eaf0; border-radius:9px; overflow:hidden; background:#fafafa; }
+.ls-card-top { padding:13px 16px 10px; border-bottom:1px solid #e8eaf0; }
+.ls-card-header { display:flex; justify-content:space-between; align-items:flex-start; gap:8px; margin-bottom:6px; }
+.ls-name { font-family:'Montserrat',sans-serif; font-weight:800; font-size:13px; color:#15131f; }
+.ls-cat  { font-family:'Montserrat',sans-serif; font-weight:700; font-size:8px; letter-spacing:.08em; text-transform:uppercase; padding:3px 9px; border-radius:999px; white-space:nowrap; flex-shrink:0; }
+.ls-health { background:rgba(69,46,128,0.1); color:#452e80; }
+.ls-edu    { background:rgba(184,110,0,0.12); color:#7a4800; }
+.ls-why  { font-size:12.5px; color:#444; line-height:1.55; }
+.ls-card-bottom { padding:10px 16px; background:#f0eefa; display:grid; grid-template-columns:1fr 1fr; gap:6px; }
+.ls-stat { display:flex; flex-direction:column; gap:2px; }
+.ls-stat-label { font-family:'Montserrat',sans-serif; font-weight:700; font-size:8px; letter-spacing:.08em; text-transform:uppercase; color:#888; }
+.ls-stat-val { font-size:12px; color:#15131f; font-weight:700; line-height:1.3; }
+.ls-stat-val.good  { color:#1a7a4a; }
+.ls-stat-val.warn  { color:#b86e00; }
+.ls-stat-val.note  { color:#452e80; }
+.ls-tags { padding:8px 16px 12px; display:flex; flex-wrap:wrap; gap:6px; }
+.ls-tag  { font-size:10.5px; color:#555; background:#eeedf8; border-radius:5px; padding:3px 9px; font-family:'Montserrat',sans-serif; font-weight:700; }
+.ls-tag.sba   { color:#1a7a4a; background:#eaf6ef; }
+.ls-tag.geo   { color:#00709a; background:#e8f7fd; }
+.ls-tag.recur { color:#452e80; background:#ede9fa; }
+.ls-tag.warn  { color:#b86e00; background:#fdf5e6; }
+
+  body { background:#fff; padding:0; }
+  .doc { box-shadow:none; border-radius:0; }
+  .header, .ddp-header, .pathway-card, .prep-note, .doc-footer { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+}
+@media (max-width:680px) {
+  .axis-grid, .two-col, .swot-grid, .cap-grid { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+<div class="doc">
+
+<!-- ══════════════════════════════════════
+     PAGE 1 — READINESS ANALYSIS
+     ══════════════════════════════════════ -->
+
+<header class="header">
+  <div class="h-logo">BLK GRVTY  /  FRANCHISE NOVA</div>
+  <div class="h-eye">Candidate Readiness  ·  Internal Analysis</div>
+  <h1 class="h-name">Brenda Reid</h1>
+  <p class="h-meta">Muleshoe, TX &nbsp;·&nbsp; <strong>HubSpot &amp; Systems Lead — BLK GRVTY</strong> &nbsp;·&nbsp; Timeframe: 6 to 12 months &nbsp;·&nbsp; Sectors: Health, Wellness &amp; Fitness · Education &amp; Childcare</p>
+  <p class="h-note">For internal FN use only — do not share with candidate</p>
+</header>
+
+<!-- Classification -->
+<div class="class-banner">
+  <div class="badge"><span>NOVA</span></div>
+  <div class="class-info">
+    <h2>Classification: <em>Nova</em></h2>
+    <p>Strong readiness, moderate FN lift — capital structuring required to close the gap. Core of the mission.</p>
+    <span class="conf-pill">Confidence &middot; High</span>
+  </div>
+</div>
+
+<!-- Two-Axis Read -->
+<div class="section">
+  <div class="sec-label">The Two-Axis Read</div>
+  <div class="axis-grid">
+    <div>
+      <div class="score-wrap">
+        <div class="ring-outer" style="--pct:77">
+          <div class="ring-inner">
+            <span class="ring-num">77</span>
+            <span class="ring-den">/ 100</span>
+          </div>
+        </div>
+        <div class="score-meta">
+          <h4>Readiness &amp; Potential</h4>
+          <div class="lift-lbl">FN Lift Required</div>
+          <div class="pills">
+            <span class="pill">Low</span>
+            <span class="pill on">Moderate</span>
+            <span class="pill">High</span>
+          </div>
+          <p class="score-note">Binding lift: Capital. 401(k) ROBS (~$180K) + real estate equity (~$130K) + SBA 7(a) — gap is closeable with the right structure. Operational and activation lift both Low.</p>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="matrix">
+        <div class="m-corner"></div>
+        <div class="m-colh">Emerging</div><div class="m-colh">Developing</div><div class="m-colh">Strong</div>
+        <div class="m-rowh">High</div>
+        <div class="m-cell m-neb"><span class="m-tag">Nebula</span></div>
+        <div class="m-cell m-nova"><span class="m-tag">Nova</span></div>
+        <div class="m-cell m-nova"><span class="m-tag">Nova</span></div>
+        <div class="m-rowh">Mod</div>
+        <div class="m-cell m-neb"><span class="m-tag">Nebula</span></div>
+        <div class="m-cell m-nova"><span class="m-tag">Nova</span></div>
+        <div class="m-cell m-nova m-here"><span class="m-tag">Nova</span></div>
+        <div class="m-rowh">Low</div>
+        <div class="m-cell m-neb"><span class="m-tag">Nebula</span></div>
+        <div class="m-cell m-nova"><span class="m-tag">Nova</span></div>
+        <div class="m-cell m-sn"><span class="m-tag">Super</span></div>
+      </div>
+      <div class="matrix-foot">Readiness &rarr; &nbsp;&middot;&nbsp; FN Lift &uarr;</div>
+    </div>
+  </div>
+</div>
+
+<!-- Readiness Dimensions -->
+<div class="section">
+  <div class="sec-label">Readiness Dimensions &nbsp;<span style="font-weight:400;letter-spacing:0;text-transform:none;font-size:11px;color:#bbb;">(capital-free)</span></div>
+  <div class="dims">
+    <div>
+      <div class="dim-top"><span class="dim-name">Operator Readiness &amp; Capability</span><span class="dim-score">27 / 32</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:84%"></div></div>
+      <p class="dim-note">15 years in operations and systems — built programs from zero. Strong project management, vendor management, and technology leadership. Not direct P&amp;L ownership but highly transferable to franchise operations.</p>
+    </div>
+    <div>
+      <div class="dim-top"><span class="dim-name">Vision, Motivation &amp; Commitment</span><span class="dim-score">22 / 27</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:81%"></div></div>
+      <p class="dim-note">Clear timeline (6–12 months), articulated why franchise vs. independent, named specific systems already researched. Strong legacy goal stated. Slight gap on full specificity of multi-unit development plan.</p>
+    </div>
+    <div>
+      <div class="dim-top"><span class="dim-name">Sector &amp; Multi-Unit Fit</span><span class="dim-score">15 / 18</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:83%"></div></div>
+      <p class="dim-note">Health, Wellness &amp; Fitness and Education &amp; Childcare are both strong FN verticals. 2–3 unit target stated. Multi-unit intent clear and consistent with research (Stretch Zone, Snap Fitness).</p>
+    </div>
+    <div>
+      <div class="dim-top"><span class="dim-name">Coachability &amp; Ecosystem Fit</span><span class="dim-score">13 / 13</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:100%"></div></div>
+      <p class="dim-note">Creative/Operator score strongly execution-oriented (5/5). Vision vs. Autonomy at 4 — follows playbooks while leading teams. Systems-builder by background. Ideal franchise system fit.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SWOT -->
+<div class="section">
+  <div class="sec-label">SWOT</div>
+  <div class="swot-grid">
+    <div class="swot-card sw-s">
+      <div class="swot-title">Strengths</div>
+      <ul>
+        <li>15 years of operations and systems experience — directly translatable to franchise management</li>
+        <li>401(k) ROBS (~$180K) + real estate equity (~$130K) provides strong capital stack beyond liquid cash</li>
+        <li>Already researched specific franchise systems — arrives prepared, not exploratory</li>
+      </ul>
+    </div>
+    <div class="swot-card sw-d">
+      <div class="swot-title">Development Areas</div>
+      <ul>
+        <li>Limited direct P&amp;L ownership history — managed budgets but not full business P&amp;L</li>
+        <li>Liquid cash ($100–250K) below typical SBA equity threshold for multi-unit — ROBS bridges this</li>
+        <li>No prior franchise ownership experience</li>
+      </ul>
+    </div>
+    <div class="swot-card sw-o">
+      <div class="swot-title">What FN Can Unlock</div>
+      <ul>
+        <li>SBA 7(a) + ROBS structure closes capital gap without additional personal debt</li>
+        <li>Membership-model systems match her thesis — FN can fast-track to Phase 2</li>
+        <li>FN Consortium lenders experienced with semi-absentee GM narratives</li>
+      </ul>
+    </div>
+    <div class="swot-card sw-r">
+      <div class="swot-title">Risks to Watch</div>
+      <ul>
+        <li>Semi-absentee narrative needs a named GM plan before SBA lender submission</li>
+        <li>ROBS setup timeline (3–4 weeks) is the critical path item — must start immediately</li>
+        <li>DFW territory availability needs franchisor confirmation before proceeding</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Capital Pathway + Roadmap -->
+<div class="section">
+  <div class="two-col">
+    <div class="pathway-card">
+      <div class="sec-label">Recommended Capital Pathway</div>
+      <div class="pathway-primary">ROBS 401(k) + SBA 7(a)</div>
+      <div class="pathway-backup">Backup: Real estate equity HELOC + FN Consortium</div>
+      <p class="pathway-note">ROBS ~$180K equity injection + SBA 7(a) ~$280K + real estate equity ~$130K + liquid cash ~$120K. Total accessible capital ~$710K — well above what a 2-unit entry requires. Not yet spoken with a lender but ready to move.</p>
+    </div>
+    <div>
+      <div class="sec-label">Path to Ownership</div>
+      <ul class="roadmap">
+        <li><span class="step-num">1</span><div><strong>Engage ROBS administrator immediately</strong> — C-Corp + 401(k) plan takes 3–4 weeks and must precede SBA closing.</div></li>
+        <li><span class="step-num">2</span><div><strong>Identify GM candidate for first location</strong> — SBA lender requires named manager and written semi-absentee narrative.</div></li>
+        <li><span class="step-num">3</span><div><strong>FDD analysis + Discovery Day</strong> — Scenthound and Stretch Zone already researched. Move directly to Phase 2.</div></li>
+        <li><span class="step-num">4</span><div><strong>SBA submission + capital close</strong> — FN facilitates lender intro. Target close within 60–90 days of franchise agreement.</div></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Expectations Check -->
+<div class="section">
+  <div class="sec-label">Expectations Check</div>
+  <div class="expect-card">
+    <div class="expect-chips">
+      <span class="chip chip-grey">Expects: 6–12 months</span>
+      <span class="arrow-sep">&rarr;</span>
+      <span class="chip chip-dark">Realistic: 9–12 months</span>
+    </div>
+    <div class="expect-row"><span class="expect-key">Why</span>ROBS setup (3–4 weeks) + SBA underwriting (60–90 days from agreement) + GM identification add time to aggressive 6-month target. Achievable with immediate action on all three.</div>
+    <div class="expect-row"><span class="expect-key">On the call</span>Affirm the urgency — Brenda is operationally ready. Reset to a 9–12 month realistic runway and emphasize ROBS engagement as the Week 1 action item.</div>
+  </div>
+</div>
+
+<!-- Next Action -->
+<div class="section">
+  <div class="sec-label">Recommended Next Action</div>
+  <div class="action-card"><strong>Book a discovery call</strong> — Brenda has named Scenthound and Stretch Zone. Both have FDDs available and match her thesis. Move directly to FDD analysis post-call. Confirm ROBS administrator engagement as Week 1 action item.</div>
+  <div class="sec-label" style="margin-top:4px;">Discovery-Call Questions</div>
+  <ul class="disc-qs">
+    <li>You mentioned Scenthound and Stretch Zone — what drew you to those two specifically, and what would make one feel like the clear right fit?</li>
+    <li>Have you identified anyone who could serve as GM for your first location? What does your thinking look like there?</li>
+    <li>You have three capital sources beyond liquid cash — 401(k), real estate equity, and SBA. Have you spoken with a financial advisor about how those work together?</li>
+    <li>What would make you feel confident enough to move forward — what does having enough information look like before you commit?</li>
+  </ul>
+</div>
+
+<!-- Data Gaps -->
+<div class="section">
+  <div class="sec-label">Data Gaps to Resolve</div>
+  <div class="gaps-wrap">
+    <span class="gap-tag">GM candidate — identified or TBD?</span>
+    <span class="gap-tag">ROBS administrator — not yet engaged</span>
+    <span class="gap-tag">DFW territory availability — needs franchisor confirmation</span>
+    <span class="gap-tag">Real estate equity exact figure — estimate only</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE 2 — DISCOVERY DAY PREP
+     ══════════════════════════════════════ -->
+
+<div class="ddp-header">
+  <div class="ddp-eye">Discovery Day Prep  ·  Nova Guide Use Only</div>
+  <div class="ddp-title">Brenda Reid — Candidate Bio &amp; Thesis</div>
+  <p class="ddp-sub">Compiled from intake form responses including new pre-discovery questions</p>
+</div>
+
+<!-- Professional Background -->
+<div class="section">
+  <div class="sec-label">Professional Background</div>
+  <div class="info-card cyan-accent">
+    <div class="info-label">Bio</div>
+    <p class="info-text">15 years in operations, systems, and technology across corporate and entrepreneurial settings. Most recently serving as HubSpot and Systems Lead at BLK GRVTY where she built the operational infrastructure for multiple programs from the ground up. Prior roles in project management, digital operations, and client services. Strong track record of building repeatable systems and managing vendor and technology relationships at scale.</p>
+  </div>
+</div>
+
+<!-- Investment Thesis -->
+<div class="section">
+  <div class="sec-label">Investment Thesis — In Candidate's Own Words</div>
+  <div style="display:flex; flex-direction:column; gap:10px;">
+    <div class="info-card purple-accent">
+      <div class="info-label">Why Franchise Ownership</div>
+      <p class="info-text">"I have spent years building and optimizing systems for other people's businesses. I want to apply that same operational discipline to something I own. Franchise ownership gives me a proven playbook and an established brand — I bring the execution layer. I am not interested in building from scratch. I want to scale something that already works."</p>
+    </div>
+    <div class="info-card egg-accent">
+      <div class="info-label">What Success Looks Like in 3–5 Years</div>
+      <p class="info-text">"In 3 years I want 2 profitable locations running with strong general managers in place and me operating at the strategic level — not in the day-to-day. In 5 years I want a platform of 3–4 units generating enough cash flow to fund the next acquisition without outside capital. I want to build something I can eventually pass to my family."</p>
+    </div>
+    <div class="two-col">
+      <div class="info-card cyan-accent">
+        <div class="info-label">Day-to-Day Involvement</div>
+        <p class="info-text">Semi-absentee — wants to hire strong GMs and operate at the ownership level, not the manager level. Consistent with Operator score and Creative/Operator rating of 5.</p>
+      </div>
+      <div class="info-card amber-accent">
+        <div class="info-label">How She Is Thinking About Capital</div>
+        <p class="info-text">Planning to use personal liquid savings, a 401(k) rollover via ROBS, and SBA 7(a) financing. Wants to minimize personal debt exposure. Has not yet spoken with a lender but is ready to move.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Research + Geography -->
+<div class="section">
+  <div class="sec-label">Franchise Research &amp; Geography</div>
+  <div class="two-col">
+    <div class="info-card cyan-accent">
+      <div class="info-label">Systems Already Researched</div>
+      <p class="info-text">Scenthound (pet wellness, recurring membership model) and Stretch Zone (assisted stretching, recurring membership). Both fit her preference for subscription-based revenue and semi-absentee operations. No Discovery Days attended yet.</p>
+    </div>
+    <div class="info-card egg-accent">
+      <div class="info-label">Target Geography &amp; Territories</div>
+      <p class="info-text">Texas — preferably Dallas-Fort Worth metro or the broader North Texas corridor. Open to Houston as a secondary market. Would consider multiple cities if the right territory opportunity presents itself.</p>
+      <p class="info-text" style="margin-top:8px;"><strong style="color:#452e80;">Units Targeted:</strong> 2–3 locations over the next 3 years.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Capital Profile -->
+<div class="section">
+  <div class="sec-label">Capital Profile</div>
+  <div class="cap-grid">
+    <div class="cap-card g">
+      <div class="cap-label">Liquid Capital</div>
+      <div class="cap-val">$100K–$250K</div>
+    </div>
+    <div class="cap-card g">
+      <div class="cap-label">Estimated Net Worth</div>
+      <div class="cap-val">$500K–$1M</div>
+    </div>
+    <div class="cap-card a">
+      <div class="cap-label">Credit Range</div>
+      <div class="cap-val">700–750</div>
+    </div>
+    <div class="cap-card g">
+      <div class="cap-label">401(k) / Retirement Assets</div>
+      <div class="cap-val">~$180K — open to ROBS</div>
+    </div>
+    <div class="cap-card g">
+      <div class="cap-label">Real Estate Equity</div>
+      <div class="cap-val">~$120K–$150K accessible</div>
+    </div>
+    <div class="cap-card c">
+      <div class="cap-label">Total Accessible Capital (est.)</div>
+      <div class="cap-val">~$600K–$730K</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Suggested Discovery Call Questions -->
+<div class="section">
+  <div class="sec-label">Suggested Discovery Call Questions</div>
+  <ul class="disc-qs">
+    <li>You mentioned Scenthound and Stretch Zone in your research — what drew you to those two specifically, and what would it take for one of them to feel like the clear right fit?</li>
+    <li>Have you identified anyone who could serve as a General Manager for your first location? What does your thinking look like on that?</li>
+    <li>Walk me through your timeline thinking — what needs to happen between now and when you sign a franchise agreement?</li>
+    <li>You mentioned a 401(k) and real estate equity as potential capital sources. Have you spoken with a financial advisor or lender about how those would work together in a franchise financing structure?</li>
+    <li>You said you want to be at the strategic level, not the day-to-day. What does that actually look like for you in year one — how involved are you comfortable being while the business is getting started?</li>
+    <li>What would make you feel confident enough to move forward — what does having enough information look like before you commit?</li>
+  </ul>
+</div>
+
+<!-- Franchise Landscape -->
+<div class="section">
+  <div class="sec-label">Systems Worth Exploring — Franchise Landscape</div>
+
+  <p class="landscape-intro">Based on Brenda's selected sectors (<strong>Health, Wellness &amp; Fitness</strong> and <strong>Education &amp; Childcare</strong>), DFW / North Texas target geography, semi-absentee ownership model, and 2–3 unit goal. Systems are ranked by fit against FN's mission. <strong>All investment figures = estimated total cost to open one location</strong> (franchise fee + build-out + equipment + working capital) — not earnings. <strong>B2C</strong> = revenue comes from individual consumers. <strong>Territory Status</strong> = based on publicly available info — always verify directly with the franchisor before proceeding.</p>
+
+  <div style="background:#fff8e1;border-left:3px solid #b86e00;border-radius:0 7px 7px 0;padding:11px 15px;margin-bottom:14px;">
+    <p style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:#b86e00;margin-bottom:6px;">⚑ SYSTEMS RESEARCHED BUT EXCLUDED — Confirmed Saturated in Target Suburbs</p>
+    <p style="font-size:12px;color:#5a4000;line-height:1.65;"><strong>Stretch Zone</strong> — locations confirmed in Frisco, Allen, McKinney, Plano, and Southlake &nbsp;·&nbsp; <strong>Elements Massage</strong> — 7+ locations across all five target suburbs &nbsp;·&nbsp; <strong>Alloy Personal Training</strong> — McKinney, Frisco, Southlake open; Plano coming &nbsp;·&nbsp; <strong>Club Pilates</strong> — Frisco, McKinney ×2, Plano confirmed &nbsp;·&nbsp; <strong>Hydrate IV Bar</strong> — Frisco open Jan 2026 &nbsp;·&nbsp; <strong>iCRYO</strong> — Frisco and Allen confirmed open. All six are strong systems nationally — the specific opportunity in Brenda's named core suburbs is not there. Being first in a market is an advantage — the six systems below are included because the franchisor actively allows or is expanding into Texas/DFW and open territory is a realistic possibility.</p>
+  </div>
+
+  <p class="landscape-note">⚑ Public information only — no FDDs reviewed. This is a conversation starter, not a formal FN recommendation. FDD analysis required before any system moves to Phase 2.</p>
+
+  <div style="display:flex;flex-direction:column;gap:12px;">
+
+    <!-- RANK 1 -->
+    <div class="ls-card">
+      <div style="background:#452e80;padding:6px 18px;display:flex;align-items:center;justify-content:space-between;">
+        <span style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:11px;color:#fff;">RANK 1</span>
+        <span style="font-size:10px;color:rgba(255,255,255,0.65);">Territory open — confirmed by franchisor's own development page</span>
+      </div>
+      <div class="ls-card-top">
+        <div class="ls-card-header">
+          <div class="ls-name">Snap Fitness</div>
+          <span class="ls-cat ls-health">Health, Wellness &amp; Fitness</span>
+        </div>
+        <p class="ls-why"><strong>B2C · Monthly membership model.</strong> 24/7 access gym franchise. Snap Fitness's own franchise development page explicitly lists <strong>Frisco, Allen, and McKinney as available territories</strong> — the strongest territory confirmation on this list. Membership-based recurring revenue. Semi-absentee ownership supported with a GM. Most successful operators own 3+ clubs. 2,000+ locations nationally — established, SBA-friendly system with lender relationships.</p>
+      </div>
+      <div class="ls-card-bottom">
+        <div class="ls-stat"><span class="ls-stat-label">Est. Total Investment / Unit</span><span class="ls-stat-val note">$200K–$400K</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">Revenue Model</span><span class="ls-stat-val good">Monthly membership / recurring ✓</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">SBA Friendly</span><span class="ls-stat-val good">Yes — confirmed</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">System Size</span><span class="ls-stat-val">2,000+ units · Established</span></div>
+      </div>
+      <div class="ls-tags">
+        <span class="ls-tag geo">Frisco, Allen, McKinney — open territories confirmed by franchisor</span>
+        <span class="ls-tag recur">Monthly recurring membership</span>
+        <span class="ls-tag sba">SBA-friendly ✓</span>
+        <span class="ls-tag">Semi-absentee ✓</span>
+        <span class="ls-tag">Multi-unit dev available</span>
+      </div>
+    </div>
+
+    <!-- RANK 2 -->
+    <div class="ls-card">
+      <div style="background:#282560;padding:6px 18px;display:flex;align-items:center;justify-content:space-between;">
+        <span style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:11px;color:#fff;">RANK 2</span>
+        <span style="font-size:10px;color:rgba(255,255,255,0.65);">DFW top growth cluster · First-mover in outer suburbs · Dallas training hub coming 2026</span>
+      </div>
+      <div class="ls-card-top">
+        <div class="ls-card-header">
+          <div class="ls-name">JETSET Pilates</div>
+          <span class="ls-cat ls-health">Health, Wellness &amp; Fitness</span>
+        </div>
+        <p class="ls-why"><strong>B2C · Subscription membership model.</strong> Modern reformer Pilates franchise franchising since 2022. DFW is explicitly named as one of their top momentum clusters nationally, with a Dallas training facility planned for 2026. McKinney and Preston Hollow (Dallas) already open — outer suburbs (Prosper, Celina, Argyle, northern Frisco) are genuine first-mover territory. Average franchise partner holds 2.5 territories. Semi-absentee model with GM running day-to-day. Territories defined at 30,000 population minimum — each DFW suburb can support multiple locations.</p>
+      </div>
+      <div class="ls-card-bottom">
+        <div class="ls-stat"><span class="ls-stat-label">Est. Total Investment / Unit</span><span class="ls-stat-val note">$525K–$750K</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">Revenue Model</span><span class="ls-stat-val good">Monthly membership / recurring ✓</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">Avg. Owner Territories</span><span class="ls-stat-val good">2.5 — multi-unit native</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">System Size</span><span class="ls-stat-val">270+ open or in dev · Growing fast</span></div>
+      </div>
+      <div class="ls-tags">
+        <span class="ls-tag geo">DFW top growth cluster · Outer suburbs first-mover</span>
+        <span class="ls-tag recur">Monthly recurring membership</span>
+        <span class="ls-tag">Semi-absentee ✓ — GM-led</span>
+        <span class="ls-tag">Multi-unit native · 2.5 avg territories</span>
+        <span class="ls-tag warn">Verify Prosper / Celina / Argyle availability</span>
+      </div>
+    </div>
+
+    <!-- RANK 3 -->
+    <div class="ls-card">
+      <div style="background:#282560;padding:6px 18px;display:flex;align-items:center;justify-content:space-between;">
+        <span style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:11px;color:#fff;">RANK 3</span>
+        <span style="font-size:10px;color:rgba(255,255,255,0.65);">Best-in-class SBA profile · Texas expansion confirmed · Outer suburb zones likely open</span>
+      </div>
+      <div class="ls-card-top">
+        <div class="ls-card-header">
+          <div class="ls-name">The Goddard School</div>
+          <span class="ls-cat ls-edu">Education &amp; Childcare</span>
+        </div>
+        <p class="ls-why"><strong>B2C · Recurring weekly tuition from families.</strong> Premium early childhood education (ages 6 weeks–6 years). Avg. EBITDA $546K for mature schools (2025 FDD). 0.0% SBA default rate — one of the most lender-friendly franchises in any category. Actively seeking Texas expansion. Core suburbs (Frisco, McKinney, Allen) have existing locations — but childcare territories are 3–7 mile radius, meaning outer growth areas like Prosper, Celina, Anna, and Little Elm are realistic open zones. Being first in a fast-growing suburb is a structural advantage for an enrollment-based model. 115+ multi-unit owners nationally.</p>
+      </div>
+      <div class="ls-card-bottom">
+        <div class="ls-stat"><span class="ls-stat-label">Est. Total Investment / Unit</span><span class="ls-stat-val warn">$650K–$1.1M+</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">Revenue Model</span><span class="ls-stat-val good">Recurring weekly tuition ✓</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">Avg. EBITDA (mature schools)</span><span class="ls-stat-val good">$546K — 2025 FDD</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">SBA Default Rate</span><span class="ls-stat-val good">0.0% — best in class</span></div>
+      </div>
+      <div class="ls-tags">
+        <span class="ls-tag geo">Texas expansion confirmed · Outer suburbs likely open</span>
+        <span class="ls-tag recur">Recurring weekly tuition</span>
+        <span class="ls-tag sba">SBA-friendly ✓ — 0% default rate</span>
+        <span class="ls-tag">115+ multi-unit owners</span>
+        <span class="ls-tag warn">Higher investment threshold · Verify specific zones</span>
+      </div>
+    </div>
+
+    <!-- RANK 4 -->
+    <div class="ls-card">
+      <div style="background:#282560;padding:6px 18px;display:flex;align-items:center;justify-content:space-between;">
+        <span style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:11px;color:#fff;">RANK 4</span>
+        <span style="font-size:10px;color:rgba(255,255,255,0.65);">Active DFW expansion · 6 new locations 2025 · Outer growth corridor open</span>
+      </div>
+      <div class="ls-card-top">
+        <div class="ls-card-header">
+          <div class="ls-name">The Learning Experience</div>
+          <span class="ls-cat ls-edu">Education &amp; Childcare</span>
+        </div>
+        <p class="ls-why"><strong>B2C · Recurring weekly tuition from families.</strong> National early childhood education franchise (ages 6 weeks–6 years) actively opening new DFW locations — Argyle opened 2026, 6 new DFW centers in 2025 on top of 60+ already in Texas. Core suburbs have existing locations but the northwest DFW growth corridor (Argyle, Little Elm, Prosper, Celina, Gunter) represents a genuine open window. The rapid pace of expansion signals the franchisor is actively awarding territory — first-mover in the next ring of DFW growth is a real opportunity.</p>
+      </div>
+      <div class="ls-card-bottom">
+        <div class="ls-stat"><span class="ls-stat-label">Est. Total Investment / Unit</span><span class="ls-stat-val warn">$500K–$900K</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">Revenue Model</span><span class="ls-stat-val good">Recurring weekly tuition ✓</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">Texas Presence</span><span class="ls-stat-val good">60+ locations · Actively expanding</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">DFW Expansion</span><span class="ls-stat-val good">6 new locations 2025 · Argyle 2026</span></div>
+      </div>
+      <div class="ls-tags">
+        <span class="ls-tag geo">Argyle, Little Elm, Prosper, Celina — open growth corridor</span>
+        <span class="ls-tag recur">Recurring weekly tuition</span>
+        <span class="ls-tag">Director-led model</span>
+        <span class="ls-tag warn">Core suburbs occupied · Verify outer zones</span>
+        <span class="ls-tag warn">Higher investment threshold</span>
+      </div>
+    </div>
+
+    <!-- RANK 5 -->
+    <div class="ls-card">
+      <div style="background:#282560;padding:6px 18px;display:flex;align-items:center;justify-content:space-between;">
+        <span style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:11px;color:#fff;">RANK 5</span>
+        <span style="font-size:10px;color:rgba(255,255,255,0.65);">Texas expansion confirmed · Lowest royalty in childcare category · 75% multi-unit owners</span>
+      </div>
+      <div class="ls-card-top">
+        <div class="ls-card-header">
+          <div class="ls-name">Lightbridge Academy</div>
+          <span class="ls-cat ls-edu">Education &amp; Childcare</span>
+        </div>
+        <p class="ls-why"><strong>B2C · Recurring weekly tuition from families.</strong> Early childhood education franchise (ages 6 weeks–pre-K) with confirmed Texas expansion — Fate/Rockwall County groundbreaking announced, prime territories available across the U.S. The lowest royalty fee in the childcare category (4%) directly supports stronger unit economics for FN candidates. $2.6M AUV and $411K EBITDA. 75% of franchise owners are multi-unit operators — purpose-built for the kind of portfolio builder Brenda is. No prior education experience required. Actively targeting new Texas markets with prime territory availability.</p>
+      </div>
+      <div class="ls-card-bottom">
+        <div class="ls-stat"><span class="ls-stat-label">Est. Total Investment / Unit</span><span class="ls-stat-val note">$700K–$1M+</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">Revenue Model</span><span class="ls-stat-val good">Recurring weekly tuition ✓</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">Avg. AUV / EBITDA</span><span class="ls-stat-val good">$2.6M AUV · $411K EBITDA</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">Multi-Unit Owners</span><span class="ls-stat-val good">75% of franchisees</span></div>
+      </div>
+      <div class="ls-tags">
+        <span class="ls-tag geo">Texas expansion confirmed · DFW prime territories available</span>
+        <span class="ls-tag recur">Recurring weekly tuition</span>
+        <span class="ls-tag sba">SBA-friendly ✓</span>
+        <span class="ls-tag">Lowest royalty in category — 4%</span>
+        <span class="ls-tag warn">Higher investment threshold · Verify DFW zones</span>
+      </div>
+    </div>
+
+    <!-- RANK 6 -->
+    <div class="ls-card">
+      <div style="background:#282560;padding:6px 18px;display:flex;align-items:center;justify-content:space-between;">
+        <span style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:11px;color:#fff;">RANK 6</span>
+        <span style="font-size:10px;color:rgba(255,255,255,0.65);">Franchise allows Texas expansion · No confirmed locations in target suburbs · First-mover potential</span>
+      </div>
+      <div class="ls-card-top">
+        <div class="ls-card-header">
+          <div class="ls-name">Anytime Fitness</div>
+          <span class="ls-cat ls-health">Health, Wellness &amp; Fitness</span>
+        </div>
+        <p class="ls-why"><strong>B2C · Monthly membership model.</strong> One of the most established 24/7 gym franchises in the world with 5,000+ locations. Membership-based recurring revenue. Strong SBA financing track record. Semi-absentee ownership supported with a GM. No confirmed locations found in Brenda's specific target suburbs (Frisco, Allen, McKinney, Prosper, Southlake) — representing a potential first-mover opportunity in a proven, nationally recognized brand. Franchise actively awards Texas territories. The brand recognition and proven membership model reduce the consumer education risk that newer brands carry.</p>
+      </div>
+      <div class="ls-card-bottom">
+        <div class="ls-stat"><span class="ls-stat-label">Est. Total Investment / Unit</span><span class="ls-stat-val note">$150K–$400K</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">Revenue Model</span><span class="ls-stat-val good">Monthly membership / recurring ✓</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">SBA Friendly</span><span class="ls-stat-val good">Yes — strong track record</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">System Size</span><span class="ls-stat-val">5,000+ units · Global brand</span></div>
+      </div>
+      <div class="ls-tags">
+        <span class="ls-tag geo">Texas territories active · No locations found in target suburbs</span>
+        <span class="ls-tag recur">Monthly recurring membership</span>
+        <span class="ls-tag sba">SBA-friendly ✓</span>
+        <span class="ls-tag">Semi-absentee ✓</span>
+        <span class="ls-tag warn">Verify specific suburb availability with franchisor</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="margin-top:14px;background:#f5f5fa;border-radius:7px;padding:13px 16px;">
+    <p style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:#452e80;margin-bottom:7px;">FN NOTE FOR NOVA GUIDE</p>
+    <p style="font-size:12px;color:#444;line-height:1.65;">The core Frisco / Allen / McKinney / Plano / Southlake corridor is heavily saturated in Health, Wellness &amp; Fitness boutique concepts. Being the first into an adjacent market — Prosper, Celina, Argyle, Little Elm — is often a stronger investment than entering a saturated suburb. For Education &amp; Childcare, the outer DFW growth suburbs represent the real opportunity window as families continue migrating northwest. The Nova Guide should have a direct conversation with Brenda about whether her geography preference should expand to include these adjacent markets to unlock more options and better territory positioning.</p>
+  </div>
+</div>
+
+
+<div class="doc-footer">
+  <p class="footer-main">Franchise Nova Intake Analysis &nbsp;&middot;&nbsp; A BLK GRVTY Initiative &nbsp;&middot;&nbsp; June 2026 &nbsp;&middot;&nbsp; Candidate: Brenda Reid (Test)</p>
+  <p class="footer-note">For internal FN use only &nbsp;&middot;&nbsp; Do not share with candidate &nbsp;&middot;&nbsp; Bands reflect operational posture, not candidate worth</p>
+</div>
+
+</div>
+<script>
+(function(){
+  var ring = document.querySelector('.ring-outer');
+  if(ring) ring.style.setProperty('--pct', 77);
+  var mx = document.querySelector('.matrix');
+  if(mx){
+    var cells = mx.querySelectorAll('.m-cell');
+    // Strong / Moderate = row index 1, col index 2 → cell index = 1*3+2 = 5
+    var here = cells[5];
+    if(here){ here.classList.add('m-here'); var d=document.createElement('div'); d.className='m-dot'; here.appendChild(d); }
+  }
+})();
+</script>
+</body>
+</html>
