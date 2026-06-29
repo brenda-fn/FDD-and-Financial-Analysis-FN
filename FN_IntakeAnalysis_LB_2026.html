@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Franchise Nova — L.B. · Internal Intake Analysis</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--black:#000;--ink:#15131f;--white:#fff;--indigo:#282560;--eggplant:#452e80;--purple:#664ca9;--cyan:#00aeef;--moon:#e1e3ee;--line:#d2d4e4;--accent:var(--purple);--accent-rgb:102,76,169;--display:'Montserrat','Neutraface Display Titling',system-ui,sans-serif;--body:'Lato',system-ui,sans-serif;}
+body.cls-supernova{--accent:var(--cyan);--accent-rgb:0,174,239;}
+body.cls-nova{--accent:var(--purple);--accent-rgb:102,76,169;}
+body.cls-nebula{--accent:var(--eggplant);--accent-rgb:69,46,128;}
+*{box-sizing:border-box;} html,body{margin:0;padding:0;}
+body{font-family:var(--body);color:var(--ink);background:var(--moon);line-height:1.5;-webkit-font-smoothing:antialiased;}
+.page{max-width:880px;margin:28px auto;background:var(--white);box-shadow:0 12px 50px rgba(20,19,31,0.18);overflow:hidden;}
+.cosmos{position:relative;color:var(--white);padding:34px 40px 30px;background:radial-gradient(1px 1px at 18% 30%,#fff,transparent),radial-gradient(1px 1px at 33% 70%,#fff,transparent),radial-gradient(1px 1px at 52% 22%,#cfd6ff,transparent),radial-gradient(1px 1px at 67% 58%,#fff,transparent),radial-gradient(1px 1px at 80% 35%,#fff,transparent),radial-gradient(1.4px 1.4px at 88% 76%,#e9d8ff,transparent),radial-gradient(1px 1px at 12% 82%,#fff,transparent),radial-gradient(1200px 380px at 78% 8%,rgba(var(--accent-rgb),0.42),transparent 60%),radial-gradient(900px 420px at 8% 110%,rgba(40,37,96,0.65),transparent 60%),linear-gradient(160deg,#05040a 0%,#0d0a1c 55%,#161033 100%);}
+.eyebrow{font-family:var(--display);font-weight:700;letter-spacing:.32em;font-size:11px;text-transform:uppercase;color:var(--cyan);margin:0 0 18px;}
+.mark{position:absolute;top:30px;right:40px;font-family:var(--display);font-weight:800;line-height:.86;font-size:20px;text-align:right;color:#fff;} .mark span{display:block;}
+.cand-name{font-family:var(--display);font-weight:900;font-size:40px;line-height:1.02;margin:0 0 6px;letter-spacing:-.01em;}
+.cand-meta{font-size:13px;color:#b9b6d6;margin:0 0 18px;font-weight:700;} .cand-meta b{color:var(--moon);}
+.snapshot{font-size:15.5px;color:#e7e6f4;max-width:62ch;margin:0;font-style:italic;}
+.intnote{margin:14px 0 0;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#ff9bb6;}
+.verdict{display:flex;align-items:center;gap:26px;padding:26px 40px;border-bottom:1px solid var(--line);background:linear-gradient(90deg,rgba(var(--accent-rgb),0.12),transparent 70%);}
+.badge{flex:0 0 auto;width:108px;height:108px;border-radius:50%;position:relative;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 45%,var(--accent) 0%,var(--eggplant) 48%,var(--indigo) 80%,#0c0a1c 100%);box-shadow:0 0 0 6px rgba(var(--accent-rgb),0.16),0 0 38px 4px rgba(var(--accent-rgb),0.55);}
+.badge::after{content:"";position:absolute;inset:0;border-radius:50%;opacity:.8;background:radial-gradient(1px 1px at 30% 35%,#fff,transparent),radial-gradient(1px 1px at 68% 60%,#fff,transparent);}
+.badge b{font-family:var(--display);font-weight:900;font-size:15px;color:#fff;z-index:1;}
+.verdict-text h2{font-family:var(--display);font-weight:900;font-size:27px;margin:0 0 2px;color:var(--ink);}
+.verdict-text .accentline{color:var(--accent);}
+.verdict-text p{margin:2px 0 0;font-size:14px;color:#4a4860;max-width:48ch;}
+.conf{margin-top:8px;display:inline-block;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);border-radius:999px;padding:3px 11px;}
+section{padding:24px 40px;border-bottom:1px solid var(--line);}
+.sec-label{font-family:var(--display);font-weight:800;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--eggplant);margin:0 0 16px;}
+.two-col{display:grid;grid-template-columns:1.05fr .95fr;gap:34px;}
+.axis-block{display:flex;gap:22px;align-items:flex-start;}
+.score-ring{flex:0 0 auto;width:96px;height:96px;border-radius:50%;background:conic-gradient(var(--accent) calc(var(--pct,0)*1%),var(--line) 0);display:flex;align-items:center;justify-content:center;}
+.score-ring .inner{width:74px;height:74px;border-radius:50%;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.score-ring .num{font-family:var(--display);font-weight:900;font-size:26px;color:var(--ink);line-height:1;}
+.score-ring .den{font-size:10px;color:#8a88a0;letter-spacing:.08em;margin-top:2px;}
+.axis-copy .lift-label{font-family:var(--display);font-weight:800;font-size:13px;color:var(--ink);margin:0 0 6px;}
+.lift-pills{display:flex;gap:6px;margin:0 0 8px;}
+.lift-pills .pill{font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:999px;background:var(--moon);color:#6c6a85;}
+.lift-pills .pill.on{background:var(--eggplant);color:#fff;}
+.axis-copy .note{font-size:12.5px;color:#5a5872;margin:0;}
+.matrix{display:grid;grid-template-columns:74px repeat(3,1fr);grid-template-rows:auto repeat(3,40px);gap:4px;font-size:10px;}
+.matrix .col-h{font-weight:700;text-transform:uppercase;color:#7a7891;text-align:center;align-self:end;padding-bottom:3px;}
+.matrix .row-h{font-weight:700;text-transform:uppercase;color:#7a7891;display:flex;align-items:center;justify-content:flex-end;padding-right:6px;}
+.matrix .cell{border-radius:5px;position:relative;}
+.cell.nebula{background:rgba(69,46,128,0.16);} .cell.nova{background:rgba(102,76,169,0.22);} .cell.supernova{background:rgba(0,174,239,0.20);}
+.cell .tag{position:absolute;top:4px;left:6px;font-size:8px;font-weight:700;color:#5b5876;text-transform:uppercase;}
+.cell.here{outline:2px solid var(--accent);}
+.cell .dot{position:absolute;width:14px;height:14px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(var(--accent-rgb),0.25),0 0 14px var(--accent);top:50%;left:50%;transform:translate(-50%,-50%);}
+.axis-foot{font-size:11px;color:#8a88a0;text-align:center;margin-top:8px;}
+.dim{margin-bottom:13px;}
+.dim .row{display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px;}
+.dim .row b{color:var(--ink);} .dim .row span{color:#7a7891;font-family:var(--display);font-weight:700;font-size:12px;}
+.bar{height:7px;background:var(--moon);border-radius:999px;overflow:hidden;}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--eggplant),var(--accent));border-radius:999px;}
+.dim small{display:block;font-size:11.5px;color:#6c6a85;margin-top:5px;}
+.swot{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.quad{border:1px solid var(--line);border-radius:9px;padding:14px 16px;}
+.quad h4{font-family:var(--display);font-weight:800;font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin:0 0 9px;}
+.quad.s h4{color:var(--cyan);} .quad.d h4{color:var(--purple);} .quad.o h4{color:var(--eggplant);} .quad.r h4{color:#b1456b;}
+.quad ul{margin:0;padding-left:16px;} .quad li{font-size:12.5px;margin-bottom:6px;color:#3c3a52;}
+.pathway{background:linear-gradient(135deg,#0d0a1c,#1a1340);color:#eceaf8;border-radius:10px;padding:20px 22px;}
+.pathway .sec-label{color:var(--cyan);}
+.pathway .route{font-family:var(--display);font-weight:800;font-size:17px;margin:0 0 4px;color:#fff;}
+.pathway .backup{font-size:12.5px;color:#b9b6d6;margin:0 0 12px;} .pathway p{font-size:13px;color:#d8d6ec;margin:0;}
+ol.roadmap{margin:0;padding-left:20px;} ol.roadmap li{font-size:13px;margin-bottom:8px;color:#3c3a52;} ol.roadmap li b{color:var(--ink);}
+.expect{background:linear-gradient(90deg,rgba(69,46,128,0.10),transparent 82%);border:1px solid var(--line);border-left:3px solid var(--eggplant);border-radius:0 9px 9px 0;padding:16px 18px;}
+.expect .erow{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:11px;}
+.expect .chip{font-family:var(--display);font-weight:800;font-size:12px;padding:6px 13px;border-radius:999px;}
+.expect .chip.exp{background:var(--moon);color:#5b5876;} .expect .chip.real{background:var(--eggplant);color:#fff;}
+.expect .arrow{font-size:16px;color:var(--eggplant);font-weight:800;}
+.expect p{margin:0 0 7px;font-size:12.5px;color:#3c3a52;} .expect p:last-child{margin:0;color:#5a5872;}
+.expect p b{color:var(--eggplant);font-family:var(--display);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;margin-right:4px;}
+.action{background:rgba(var(--accent-rgb),0.12);border-left:3px solid var(--accent);padding:14px 18px;border-radius:0 8px 8px 0;font-size:14px;margin-bottom:16px;}
+.action b{font-family:var(--display);}
+.qs{margin:0;padding-left:18px;} .qs li{font-size:13px;margin-bottom:6px;color:#3c3a52;}
+.gaps{display:flex;flex-wrap:wrap;gap:8px;} .gaps .g{font-size:11.5px;background:#fff;border:1px dashed #b1456b;color:#8a3554;border-radius:6px;padding:5px 10px;}
+/* ---- page 2 additions, same visual language ---- */
+.bg-copy{font-size:13.5px;color:#3c3a52;margin:0;max-width:70ch;}
+.thesis{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.tcard{border:1px solid var(--line);border-radius:9px;padding:14px 16px;background:linear-gradient(180deg,#fff,#fbfbfe);}
+.tcard h5{font-family:var(--display);font-weight:800;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--eggplant);margin:0 0 7px;}
+.tcard p{margin:0;font-size:12.5px;color:#3c3a52;}
+.grid6{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.cellk{background:linear-gradient(135deg,#0d0a1c,#1a1340);color:#eceaf8;border-radius:9px;padding:14px 15px;}
+.cellk .k{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#9d9bc0;font-weight:700;margin:0 0 6px;font-family:var(--display);}
+.cellk .v{font-family:var(--display);font-weight:800;font-size:16px;color:#fff;line-height:1.15;}
+.cellk .s{font-size:11px;color:#b9b6d6;margin-top:4px;}
+.excl{background:linear-gradient(90deg,rgba(214,158,46,0.16),transparent 85%);border:1px solid #e7c878;border-left:3px solid #d69e2e;border-radius:0 9px 9px 0;padding:15px 18px;margin-bottom:6px;}
+.excl h4{font-family:var(--display);font-weight:800;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#9c6b13;margin:0 0 10px;}
+.excl .ex{font-size:12.5px;color:#5a4a22;margin-bottom:9px;} .excl .ex:last-child{margin-bottom:0;} .excl .ex b{color:#7a5410;}
+.syscard{border:1px solid var(--line);border-radius:11px;overflow:hidden;margin-bottom:16px;background:#fff;}
+.syscard .rankbar{height:5px;background:linear-gradient(90deg,var(--eggplant),var(--accent));}
+.syscard.gated .rankbar{background:linear-gradient(90deg,#7a5410,#d69e2e);}
+.sysbody{padding:16px 18px;}
+.syshead{display:flex;align-items:flex-start;gap:12px;justify-content:space-between;margin-bottom:8px;flex-wrap:wrap;}
+.sysrank{font-family:var(--display);font-weight:900;font-size:13px;color:#fff;background:var(--accent);width:26px;height:26px;border-radius:7px;display:flex;align-items:center;justify-content:center;flex:0 0 auto;}
+.syscard.gated .sysrank{background:#d69e2e;}
+.systitle{flex:1 1 auto;min-width:200px;}
+.systitle h3{font-family:var(--display);font-weight:900;font-size:17px;margin:0 0 4px;color:var(--ink);}
+.vbadge{display:inline-block;font-family:var(--display);font-weight:700;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--eggplant);background:rgba(69,46,128,0.10);border:1px solid rgba(69,46,128,0.30);border-radius:999px;padding:3px 9px;}
+.flagpill{display:inline-block;font-family:var(--display);font-weight:800;font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:#7a5410;background:rgba(214,158,46,0.18);border:1px solid #e7c878;border-radius:6px;padding:4px 9px;margin-top:6px;}
+.sysdesc{font-size:13px;color:#3c3a52;margin:0 0 12px;} .sysdesc .bc{font-family:var(--display);font-weight:800;color:var(--ink);}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-bottom:11px;}
+.stat{background:#f7f7fb;border:1px solid var(--line);border-radius:8px;padding:9px 11px;}
+.stat .l{font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:#8a88a0;font-weight:700;font-family:var(--display);margin-bottom:3px;}
+.stat .v{font-size:12.5px;color:var(--ink);font-weight:700;}
+.systags{display:flex;flex-wrap:wrap;gap:6px;}
+.systags span{font-size:10.5px;font-weight:700;color:#5a5872;background:var(--moon);border-radius:999px;padding:3px 10px;}
+.fnnote{background:linear-gradient(135deg,#0d0a1c,#1a1340);color:#d8d6ec;border-radius:10px;padding:18px 20px;}
+.fnnote .sec-label{color:var(--cyan);} .fnnote p{margin:0;font-size:13px;line-height:1.6;}
+.aboutbox{background:rgba(var(--accent-rgb),0.08);border:1px solid var(--line);border-radius:10px;padding:16px 18px;}
+.aboutbox p{margin:0;font-size:13.5px;color:#3c3a52;}
+.invnote{font-size:12px;color:#5a5872;background:#f7f7fb;border:1px solid var(--line);border-left:3px solid var(--cyan);border-radius:0 8px 8px 0;padding:11px 14px;margin-top:4px;}
+.disc{padding:18px 40px 26px;background:var(--ink);color:#9a98b4;font-size:11px;} .disc p{margin:0;line-height:1.55;}
+footer{padding:18px 40px 26px;background:var(--ink);color:#9a98b4;font-size:11px;}
+footer .legend{display:flex;gap:20px;flex-wrap:wrap;margin-bottom:12px;} footer .legend span{display:flex;align-items:center;gap:7px;color:#cbc9e0;font-weight:700;}
+footer .legend i{width:11px;height:11px;border-radius:50%;display:inline-block;}
+footer .leg-sn{background:var(--cyan);} footer .leg-n{background:var(--purple);} footer .leg-neb{background:var(--eggplant);} footer p{margin:0;line-height:1.55;}
+@media print{body{background:#fff;} .page{box-shadow:none;margin:0;max-width:none;} .cosmos{-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+@media (max-width:720px){.two-col{grid-template-columns:1fr;} .swot{grid-template-columns:1fr;} .thesis{grid-template-columns:1fr;} .grid6{grid-template-columns:1fr 1fr;} .mark{position:static;text-align:left;margin-bottom:14px;}}
+</style></head>
+<body class="cls-supernova">
+
+<div class="page">
+  <header class="cosmos">
+    <div class="mark"><span>BLK</span><span>GRVTY</span></div>
+    <p class="eyebrow">Franchise Nova &middot; Candidate Readiness &middot; Internal Analysis</p>
+    <h1 class="cand-name">L.B.</h1>
+    <p class="cand-meta">Atlanta, GA (Dunwoody / Sandy Springs · 30338) &nbsp;&middot;&nbsp; <b>Owner / Operator</b> &nbsp;&middot;&nbsp; Home Services · Hospitality (Extended-Stay) &nbsp;&middot;&nbsp; Timeframe: Within 6 months</p>
+    <p class="snapshot">An experienced, highly bankable owner-operator — over $1M in P&amp;L responsibility, 750+ credit, $1M+ net worth — pairing a crisp recurring-revenue, semi-absentee, multi-unit thesis with real urgency. Operationally ready to move fast; liquid capital is the one lever to structure.</p>
+    <p class="intnote">For internal FN use only — do not share with candidate</p>
+  </header>
+
+  <div class="verdict">
+    <div class="badge"><b>NOVA</b></div>
+    <div class="verdict-text">
+      <h2>Classification: <span class="accentline">Super Nova</span></h2>
+      <p>High operational readiness. The only meaningful lift is structuring capital to match a 4-unit, semi-absentee ambition — his credit and net worth make that very workable.</p>
+      <span class="conf">Confidence &middot; Medium</span>
+    </div>
+  </div>
+
+  <section>
+    <p class="sec-label">The Two-Axis Read</p>
+    <div class="two-col">
+      <div><div class="axis-block">
+        <div class="score-ring" data-score="83"><div class="inner"><span class="num">83</span><span class="den">/ 100</span></div></div>
+        <div class="axis-copy">
+          <p class="lift-label">Readiness &amp; Potential</p>
+          <p class="lift-label" style="color:var(--eggplant);margin-top:14px;">FN Lift Required</p>
+          <div class="lift-pills" data-lift="Moderate"><span class="pill">Low</span><span class="pill">Moderate</span><span class="pill">High</span></div>
+          <p class="note">Binding constraint: <b>Capital (liquidity for multi-unit pace)</b>. Strong credit and net worth make the lift very workable via SBA.</p>
+        </div>
+      </div></div>
+      <div>
+        <div class="matrix" data-readiness="strong" data-lift="Moderate">
+          <div class="corner"></div><div class="col-h">Emerging</div><div class="col-h">Developing</div><div class="col-h">Strong</div>
+          <div class="row-h">High</div><div class="cell nebula"><span class="tag">Nebula</span></div><div class="cell nova"><span class="tag">Nova</span></div><div class="cell nova"><span class="tag">Nova</span></div>
+          <div class="row-h">Moderate</div><div class="cell nebula"><span class="tag">Nebula</span></div><div class="cell nova"><span class="tag">Nova</span></div><div class="cell nova"><span class="tag">Nova</span></div>
+          <div class="row-h">Low</div><div class="cell nebula"><span class="tag">Nebula</span></div><div class="cell nova"><span class="tag">Nova</span></div><div class="cell supernova"><span class="tag">Super</span></div>
+        </div>
+        <p class="axis-foot">Readiness &rarr; &nbsp;&middot;&nbsp; FN Lift &uarr;</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="sec-label">Readiness Dimensions <span style="color:#a9a7c0;font-weight:700;">(capital-free)</span></p>
+    <div class="dim"><div class="row"><b>Operator Readiness &amp; Capability</b><span>30 / 35</span></div><div class="bar"><i data-score="30" data-max="35"></i></div><small>Runs a strategy firm and reports 3+ years overseeing P&amp;L / budgets above $1M, with self-rated sales "better than most." That is a genuine operator profile. Held just short of the ceiling only because exact tenure is unstated and he has not yet operated inside a franchise system.</small></div><div class="dim"><div class="row"><b>Vision, Motivation &amp; Commitment</b><span>23 / 30</span></div><div class="bar"><i data-score="23" data-max="30"></i></div><small>Most urgent timeline option (within 6 months), a clear 4+ unit regional/national plan, and an articulate investment thesis (recurring revenue, shared labor, scalable defensibility). Dinged for no explicit franchise-vs-independent rationale and no stated legacy/wealth narrative.</small></div><div class="dim"><div class="row"><b>Sector &amp; Multi-Unit Fit</b><span>18 / 20</span></div><div class="bar"><i data-score="18" data-max="20"></i></div><small>Both selected sectors map to exact FN verticals, target is 4+ units, and the semi-absentee model fits multi-unit. Slight ding: the Hospitality (extended-stay) pick conflicts with his own "moderate asset intensity" criterion, a coherence flag to resolve on the call.</small></div><div class="dim"><div class="row"><b>Coachability &amp; Ecosystem Fit</b><span>12 / 15</span></div><div class="bar"><i data-score="12" data-max="15"></i></div><small>Scores high on "thrive within a shared vision" (4/5) and operator/execute-the-plan (4/5), with engaged, specific responses and openness to background/financial review. Minor ding for blank fields and no named systems yet.</small></div>
+  </section>
+
+  <section>
+    <p class="sec-label">SWOT</p>
+    <div class="swot">
+      <div class="quad s"><h4>Strengths</h4><ul><li>Proven owner-operator: 3+ years of P&amp;L / budget ownership above $1M annually.</li><li>Highly bankable — 750+ credit and $1M+ net worth give strong SBA and collateral capacity.</li><li>Crisp, self-authored thesis: recurring revenue, shared labor across units, scalable defensibility.</li><li>Decisive and urgent (6-month timeline) with a clear multi-unit, semi-absentee intent.</li></ul></div>
+      <div class="quad d"><h4>Development Areas</h4><ul><li>Liquid capital ($50K–$100K) is light relative to a near-term 4+ unit build.</li><li>No prior franchise-system operating experience.</li><li>Has not named any target systems — clean slate.</li><li>"Why franchise vs. build independent" and an explicit 3–5 yr success picture are unstated.</li></ul></div>
+      <div class="quad o"><h4>What FN Can Unlock</h4><ul><li>Structure his net worth/credit into deployable capital (SBA 7(a), portfolio/HELOC backup).</li><li>Match him to recurring + semi-absentee systems with confirmed GA territory.</li><li>Sequence a realistic 24–36 month, 4-unit rollout instead of an all-at-once push.</li><li>Open a capital-partner / equity-group track for the hospitality ambition.</li></ul></div>
+      <div class="quad r"><h4>Risks to Watch</h4><ul><li>Capital-vs-ambition mismatch if he tries to fund 4 units from liquid alone.</li><li>Hospitality interest conflicts with his stated "moderate asset intensity" — risk of chasing capital-heavy extended-stay and stalling.</li><li>Semi-absentee success hinges on hiring/retaining a strong GM (manager-turnover risk).</li><li>6-month timeline likely optimistic for a multi-unit, financed start.</li></ul></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="two-col">
+      <div class="pathway"><p class="sec-label">Recommended Capital Pathway</p><p class="route">SBA 7(a) — owner is highly bankable</p><p class="backup">Backup: Net-worth-backed financing (HELOC / securities-backed) or phased area-development; equity / capital partner for any hospitality play</p><p>Readiness is high on a capital-free basis — the gap is purely liquidity for multi-unit pace. With 750+ credit and $1M+ net worth, he is a strong SBA 7(a) candidate, and most recommended systems are SBA-registered (Neighborly, Authority Brands). That closes the gap for home services; extended-stay hospitality needs a different, equity-partner structure.</p></div>
+      <div><p class="sec-label">Path to Ownership</p><ol class="roadmap"><li><b>Verify &amp; structure capital.</b> Confirm documented liquid vs. financed capital and SBA equity-injection capacity against his $1M+ net worth.</li><li><b>Down-select 1–2 systems.</b> Recurring + semi-absentee + confirmed GA territory; request zip-level availability from each franchisor.</li><li><b>Finance &amp; validate.</b> SBA 7(a) pre-qualification, FDD review, Item-19 and validation calls with existing owners, Discovery Day.</li><li><b>Open &amp; phase.</b> Launch unit 1 with a franchisor-approved GM (semi-absentee), then phase units 2–4 over 24–36 months; treat hospitality as a later capital-partner track.</li></ol></div>
+    </div>
+  </section>
+
+  <section>
+    <p class="sec-label">Expectations Check</p>
+    <div class="expect">
+      <div class="erow"><span class="chip exp">Expects: Within 6 months</span><span class="arrow">&rarr;</span><span class="chip real">Realistic: ~9–15 mo to first unit · 24–36 mo for 4 units</span></div>
+      <p><b>Why</b> Financing approval, FDD review/validation, territory selection, and hiring a franchisor-approved GM for semi-absentee operation realistically push first-unit opening to 9–15 months; a 4-unit footprint is a staged 24–36 month build, not a 6-month event.</p>
+      <p><b>On the call</b> Clarify whether "6 months" means signed/funded or first location open, confirm how much capital he will deploy vs. finance, and agree a unit-by-unit sequencing plan.</p>
+    </div>
+  </section>
+
+  <section>
+    <p class="sec-label">Recommended Next Action</p>
+    <div class="action"><b>Book the Discovery Call as a high-priority Super Nova. Lead with capital structuring (SBA 7(a) + net-worth backup) and a shortlist of 2 recurring/semi-absentee home-services systems with open Atlanta-metro territory; frame hospitality as a separate, longer-horizon capital-partner conversation.</b></div>
+    <p class="sec-label" style="margin-top:4px;">Discovery-Call Questions</p>
+    <ul class="qs"><li>When you say &ldquo;within 6 months,&rdquo; do you mean signed and funded, or first location open — and what&rsquo;s driving that timeline?</li><li>Of your $50K–$100K liquid, how much would you deploy as an SBA equity injection, and how much of your $1M+ net worth is available as collateral/backup?</li><li>Your thesis emphasizes &ldquo;moderate asset intensity.&rdquo; Extended-stay hospitality is highly real-estate-intensive — is that a near-term play or a longer-horizon, capital-partner ambition?</li><li>For semi-absentee operation, do you have a GM/operator in mind or will you recruit? What&rsquo;s your management bandwidth across four units?</li><li>Which sub-markets are you anchoring on — the Dunwoody/Sandy Springs core, or north-metro growth corridors (Forsyth, Cherokee, Gwinnett)?</li><li>Have you looked at specific systems yet? Any preference on emerging vs. established brands, or on year-round vs. seasonal concepts?</li></ul>
+  </section>
+
+  <section style="border-bottom:none;">
+    <p class="sec-label">Data Gaps to Resolve</p>
+    <div class="gaps"><span class="g">Brand-stage preference (not captured)</span><span class="g">Seasonality preference (not captured)</span><span class="g">Why franchise vs. independent</span><span class="g">Explicit 3–5 yr success vision</span><span class="g">Specific systems researched (none listed)</span><span class="g">Capital deployment plan (liquid vs. financed)</span><span class="g">Solo vs. investment group (group fields blank)</span><span class="g">Last-name spelling on intake — verify</span><span class="g">Zip-level target sub-market</span><span class="g">Hospitality intent vs. asset-intensity thesis</span></div>
+  </section>
+
+  <footer>
+    <div class="legend"><span><i class="leg-sn"></i>Super Nova &mdash; ready, move fast</span><span><i class="leg-n"></i>Nova &mdash; strong potential, real FN lift</span><span><i class="leg-neb"></i>Nebula &mdash; not yet, door stays open</span></div>
+    <p>Generated by the Franchise Nova intake system &middot; A BLK GRVTY initiative. Bands reflect operational posture, not candidate worth.</p>
+  </footer>
+</div>
+
+<div class="page">
+  <header class="cosmos" style="background:linear-gradient(160deg,#05040a,#0d0a1c 60%,#10233a 100%);border-bottom:3px solid var(--cyan);">
+    <div class="mark"><span>BLK</span><span>GRVTY</span></div>
+    <p class="eyebrow">Franchise Nova &middot; Discovery Day Prep</p>
+    <h1 class="cand-name">L.B.</h1>
+    <p class="cand-meta">Atlanta, GA (Dunwoody / Sandy Springs · 30338) &nbsp;&middot;&nbsp; Home Services · Hospitality (Extended-Stay) &nbsp;&middot;&nbsp; Target: Atlanta metro, GA — North-metro core (Dunwoody/Sandy Springs, 30338) with regional/national expansion intent</p>
+    <p class="intnote">For internal FN use only — do not share with candidate</p>
+  </header>
+
+  <section>
+    <p class="sec-label">Professional Background</p>
+    <p class="bg-copy">Reports an Owner/Operator role with 3+ years of P&amp;L / budget responsibility above $1M annually and self-rated executive sales “better than most.” Values profile skews results-driven (5/5) and operator/execute-the-plan (4/5), with high alignment to a shared vision (4/5) — a seasoned operator who leads through systems and people. Exact tenure and the nature of the firm should be confirmed on the call.</p>
+  </section>
+
+  <section>
+    <p class="sec-label">Investment Thesis</p>
+    <div class="thesis"><div class="tcard"><h5>Why franchise / sectors</h5><p>Seeks recurring subscription revenue, a shared labor model deployable across units, and moderate asset intensity — &ldquo;defensible but scalable.&rdquo; Home Services and Hospitality were the two selected verticals.</p></div><div class="tcard"><h5>Success in 3–5 years</h5><p>Not explicitly stated. Inferred from intake: regional/national expansion to a 4+ unit, semi-absentee portfolio. <i>Confirm an explicit 3–5 yr picture on the call.</i></p></div><div class="tcard"><h5>Day-to-day involvement</h5><p>Semi-absentee — intends to lead through managers rather than operate daily. Consistent with his multi-unit, executive-owner posture.</p></div><div class="tcard"><h5>Capital thinking</h5><p>Not explicitly described. Profile: $50K–$100K liquid, $1M+ net worth, 750+ credit, open to a background/financial review. Points to an SBA + net-worth-backed structure.</p></div></div>
+  </section>
+
+  <section>
+    <p class="sec-label">Franchise Research &amp; Geography</p>
+    <p class="bg-copy"><b>Systems already researched:</b> None named at intake — clean slate.<br><b>Target geography:</b> Atlanta metro, GA — North-metro core (Dunwoody/Sandy Springs, 30338) with regional/national expansion intent<br><b>Units target:</b> 4+</p>
+  </section>
+
+  <section>
+    <p class="sec-label">Capital Profile</p>
+    <div class="grid6"><div class="cellk"><div class="k">Liquid Capital</div><div class="v">$50K – $100K</div><div class="s">Documented at later stage</div></div><div class="cellk"><div class="k">Net Worth</div><div class="v">$1M+</div><div class="s">Strong collateral capacity</div></div><div class="cellk"><div class="k">Credit Range</div><div class="v">750+</div><div class="s">Highly bankable</div></div><div class="cellk"><div class="k">SBA Potential</div><div class="v">High</div><div class="s">750+ credit + $1M+ net worth</div></div><div class="cellk"><div class="k">Ownership Model</div><div class="v">Semi-absentee</div><div class="s">Manager-led / multi-unit</div></div><div class="cellk"><div class="k">Total Accessible Capital (est.)</div><div class="v">$50K–$100K liquid<br>+ SBA / net-worth leverage</div><div class="s">Verify deployable amount</div></div></div>
+  </section>
+
+  <section>
+    <p class="sec-label">Franchise Landscape — Internal</p>
+    <div class="excl"><h4>Saturation &amp; Fit Exclusions</h4><div class="ex"><b>Lawn Doctor</b> — Ownership-model mismatch — the franchise agreement requires the owner to devote full time and attention to the business, which fails the semi-absentee filter. (Recurring lawn care otherwise fits the thesis.)</div><div class="ex"><b>Confirmed zip-level saturation in Dunwoody / Sandy Springs (30338)</b> — Pending verification — metro Atlanta is a mature, competitive home-services market, so the dense north-metro core may already be claimed by some brands. First-mover room is more likely in growth corridors (Forsyth, Cherokee, outer Gwinnett). Confirm available territory directly with each franchisor before the call.</div></div>
+    <div style="margin-top:16px;"><div class="syscard "><div class="rankbar"></div><div class="sysbody"><div class="syshead"><div class="sysrank">1</div><div class="systitle"><h3>The Cleaning Authority</h3><span class="vbadge">FN Vertical · Home Services</span></div></div><p class="sysdesc"><span class="bc">B2C.</span> Anchor recommendation. Biweekly residential cleaning is textbook recurring revenue, the model is explicitly run semi-absentee/absentee with a manager and Mon–Fri hours, and it is GA-available. Authority Brands backing makes it SBA-friendly — a clean fit for his bankability and multi-unit intent.</p><div class="stats"><div class="stat"><div class="l">Est. Total Investment / Unit (cost to open — not earnings)</div><div class="v">$103,875 – $175,250</div></div><div class="stat"><div class="l">Revenue Model</div><div class="v">Recurring biweekly residential cleaning</div></div><div class="stat"><div class="l">Key Metric</div><div class="v">Mon–Fri ops · manager-led</div></div><div class="stat"><div class="l">System Size</div><div class="v">Established · founded 1977 · ~224–240 territories</div></div></div><div class="systags"><span>Recurring</span><span>Semi-absentee</span><span>Established</span><span>GA available</span><span>SBA-friendly</span></div></div></div><div class="syscard "><div class="rankbar"></div><div class="sysbody"><div class="syshead"><div class="sysrank">2</div><div class="systitle"><h3>TruBlue Total House Care</h3><span class="vbadge">FN Vertical · Home Services</span></div></div><p class="sysdesc"><span class="bc">B2C.</span> Best capital fit on the list — home-based, ~$65K–$91K total, so his liquid can cover the SBA equity injection comfortably. “House Care Plus” is a true monthly subscription (recurring), it is year-round, and the FDD lets a franchisor-approved manager run it day-to-day. Aging-in-place + busy-family demand suits north-metro Atlanta.</p><div class="stats"><div class="stat"><div class="l">Est. Total Investment / Unit (cost to open — not earnings)</div><div class="v">$65,050 – $91,400</div></div><div class="stat"><div class="l">Revenue Model</div><div class="v">Monthly “House Care Plus” subscription + repeat projects</div></div><div class="stat"><div class="l">Key Metric</div><div class="v">Lowest entry cost · year-round</div></div><div class="stat"><div class="l">System Size</div><div class="v">Emerging · ~70–105 units</div></div></div><div class="systags"><span>Recurring</span><span>Subscription</span><span>Semi-absentee</span><span>Year-round</span><span>Lowest capital</span><span>Emerging</span></div></div></div><div class="syscard "><div class="rankbar"></div><div class="sysbody"><div class="syshead"><div class="sysrank">3</div><div class="systitle"><h3>Pool Scouts</h3><span class="vbadge">FN Vertical · Home Services</span></div></div><p class="sysdesc"><span class="bc">B2C.</span> Weekly pool service = strong recurring contracts; semi-absentee is explicitly offered; territories are protected by zip; and metro Atlanta is dense Sun-Belt pool country, so the season runs long. Buzz Franchise Brands platform. Mild peak-season skew to verify against his year-round expectations.</p><div class="stats"><div class="stat"><div class="l">Est. Total Investment / Unit (cost to open — not earnings)</div><div class="v">$103,000 – $152,920</div></div><div class="stat"><div class="l">Revenue Model</div><div class="v">Recurring weekly pool maintenance contracts</div></div><div class="stat"><div class="l">Key Metric</div><div class="v">Protected zip territories · Sun-Belt density</div></div><div class="stat"><div class="l">System Size</div><div class="v">Growth · ~71–81 units</div></div></div><div class="systags"><span>Recurring</span><span>Route-based</span><span>Semi-absentee</span><span>GA / Sun-Belt</span><span>Mild seasonality</span></div></div></div><div class="syscard "><div class="rankbar"></div><div class="sysbody"><div class="syshead"><div class="sysrank">4</div><div class="systitle"><h3>Window Genie</h3><span class="vbadge">FN Vertical · Home Services</span></div></div><p class="sysdesc"><span class="bc">B2C.</span> Adds category diversification (exterior cleaning) without overlapping the others. Neighborly &ldquo;executive ownership” model = manager-led/semi-absentee; on the SBA Franchise Directory; year-round multi-service menu drives repeat work. Recurring is repeat-based rather than locked subscription — a notch below the cleaning/pool contracts.</p><div class="stats"><div class="stat"><div class="l">Est. Total Investment / Unit (cost to open — not earnings)</div><div class="v">$125,600 – $300,000</div></div><div class="stat"><div class="l">Revenue Model</div><div class="v">Repeat exterior maintenance (multi-service)</div></div><div class="stat"><div class="l">Key Metric</div><div class="v">Neighborly platform · SBA Directory</div></div><div class="stat"><div class="l">System Size</div><div class="v">Growth · ~100–200 territories</div></div></div><div class="systags"><span>Repeat revenue</span><span>Semi-absentee</span><span>Neighborly</span><span>Year-round</span><span>SBA-registered</span></div></div></div><div class="syscard "><div class="rankbar"></div><div class="sysbody"><div class="syshead"><div class="sysrank">5</div><div class="systitle"><h3>Mosquito Joe</h3><span class="vbadge">FN Vertical · Home Services</span></div></div><p class="sysdesc"><span class="bc">B2C.</span> Strong season-long recurring (retained customers return year over year) under Neighborly&rsquo;s &ldquo;executive ownership” (semi-absentee) model; residential + commercial. Caveats: higher entry (~$150K–$192K, financing needed) and a seasonal lean despite Neighborly&rsquo;s year-round framing — verify against his expectations.</p><div class="stats"><div class="stat"><div class="l">Est. Total Investment / Unit (cost to open — not earnings)</div><div class="v">$150,155 – $192,075</div></div><div class="stat"><div class="l">Revenue Model</div><div class="v">Season-long recurring service plans (retained customers)</div></div><div class="stat"><div class="l">Key Metric</div><div class="v">~35% of owners ≥ system avg revenue*</div></div><div class="stat"><div class="l">System Size</div><div class="v">Scaled · ~200–415 locations</div></div></div><div class="systags"><span>Recurring</span><span>Semi-absentee</span><span>Neighborly</span><span>Higher capital</span><span>Seasonal lean</span></div></div></div><div class="syscard gated"><div class="rankbar"></div><div class="sysbody"><div class="syshead"><div class="sysrank">6</div><div class="systitle"><h3>WoodSpring Suites (Choice Hotels)</h3><span class="vbadge">FN Vertical · Hospitality</span><div class="flagpill">CAPITAL-GATED — longer-horizon / capital-partner pathway, not a near-term solo buy</div></div></div><p class="sysdesc"><span class="bc">B2C.</span> Included to honor his second selected vertical, but flagged hard. Economy extended-stay is a real-estate development: total investment ~$5M–$13M+ per property with a ~30-year payback — entirely out of reach at $50K–$100K liquid as a direct owner. It also conflicts with his own &ldquo;moderate asset intensity&rdquo; thesis. Realistic only as an equity/JV or Master-Development-Agreement play down the line. Steer near-term energy to home services.</p><div class="stats"><div class="stat"><div class="l">Est. Total Investment / Unit (cost to open — not earnings)</div><div class="v">$5,035,000 – $13,300,000 (real-estate development)</div></div><div class="stat"><div class="l">Revenue Model</div><div class="v">Long-stay occupancy (30+ night stays)</div></div><div class="stat"><div class="l">Key Metric</div><div class="v">~30-yr payback · GM-operated</div></div><div class="stat"><div class="l">System Size</div><div class="v">Established · 300+ U.S. locations</div></div></div><div class="systags"><span>Extended-stay</span><span>Capital-gated</span><span>Real-estate heavy</span><span>Master-Dev path</span><span>Longer horizon</span></div></div></div></div>
+  </section>
+
+  <section style="border-bottom:none;">
+    <div class="fnnote"><p class="sec-label">FN Note for the Nova Guide</p><p>Frank read for the call: the strongest signal in this intake is that L.B.&rsquo;s self-authored thesis — recurring subscription revenue, a shared labor model across units, and <i>moderate</i> asset intensity — points squarely at home services and quietly contradicts his own Hospitality selection. Extended-stay hotels are the most asset-heavy thing in franchising; at $50K–$100K liquid they are not a near-term move. Don&rsquo;t spend the call litigating six brands — bring two home-services systems with confirmed Atlanta territory, lead with SBA structuring (his credit and net worth make him very bankable), and park hospitality as a &ldquo;phase-two, capital-partner&rdquo; conversation. Watch the 6-month timeline and the 4-unit-at-once instinct; sequence it. Verify the last-name spelling and whether this is solo or a group (group fields were blank).</p></div>
+  </section>
+
+  <footer>
+    <p>Generated by the Franchise Nova intake system &middot; A BLK GRVTY initiative &middot; Investment figures are estimates of the cost to open one unit (not earnings) and must be verified against each franchisor&rsquo;s current FDD. Territory availability is unconfirmed until checked directly with each franchisor.</p>
+  </footer>
+</div>
+
+<script>
+(function(){
+  document.querySelectorAll('.score-ring[data-score]').forEach(function(r){var v=parseFloat(r.getAttribute('data-score'))||0;r.style.setProperty('--pct',Math.max(0,Math.min(100,v)));});
+  document.querySelectorAll('.bar i[data-score]').forEach(function(b){var s=parseFloat(b.getAttribute('data-score'))||0,m=parseFloat(b.getAttribute('data-max'))||1;b.style.width=Math.round(s/m*100)+'%';});
+  document.querySelectorAll('.lift-pills[data-lift]').forEach(function(p){var w=(p.getAttribute('data-lift')||'').trim().toLowerCase();p.querySelectorAll('.pill').forEach(function(pl){if(pl.textContent.trim().toLowerCase()===w)pl.classList.add('on');});});
+  var badge=document.querySelector('.badge b');if(badge){if(document.body.classList.contains('cls-supernova'))badge.textContent='SUPER';else if(document.body.classList.contains('cls-nebula'))badge.textContent='NEBULA';else badge.textContent='NOVA';}
+  var mx=document.querySelector('.matrix[data-readiness]');if(mx){var col={emerging:0,developing:1,strong:2}[(mx.getAttribute('data-readiness')||'').trim().toLowerCase()];var row={high:0,moderate:1,low:2}[(mx.getAttribute('data-lift')||'').trim().toLowerCase()];if(col!=null&&row!=null){var c=mx.querySelectorAll('.cell')[row*3+col];if(c){c.classList.add('here');var d=document.createElement('span');d.className='dot';c.appendChild(d);}}}
+})();
+</script>
+</body></html>
