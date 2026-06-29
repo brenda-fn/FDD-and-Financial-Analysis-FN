@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Franchise Nova · Publisher</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --indigo:   #282560;
+  --eggplant: #452e80;
+  --purple:   #664ca9;
+  --cyan:     #00aeef;
+  --moon:     #e1e3ee;
+  --ink:      #15131f;
+  --green:    #1a7a4a;
+  --red:      #b1456b;
+  --amber:    #b86e00;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  background: linear-gradient(160deg, #05040a 0%, #0d0a1c 55%, #161033 100%);
+  min-height: 100vh;
+  color: #e1e3ee;
+  -webkit-font-smoothing: antialiased;
+  padding: 40px 20px 60px;
+}
+
+.page {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* ── Header ── */
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.logo {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 11px;
+  letter-spacing: .22em;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 16px;
+}
+.title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 32px;
+  color: #fff;
+  margin-bottom: 8px;
+}
+.subtitle {
+  font-size: 14px;
+  color: #9a98b4;
+  max-width: 44ch;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ── Card ── */
+.card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 28px 32px;
+  margin-bottom: 16px;
+}
+.card-label {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 9px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 16px;
+}
+
+/* ── Drop Zones ── */
+.drop-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+.drop-zone {
+  border: 2px dashed rgba(102,76,169,0.4);
+  border-radius: 10px;
+  padding: 24px 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  background: rgba(102,76,169,0.05);
+}
+.drop-zone:hover, .drop-zone.drag-over {
+  border-color: var(--cyan);
+  background: rgba(0,174,239,0.08);
+}
+.drop-zone.loaded {
+  border-color: var(--green);
+  background: rgba(26,122,74,0.08);
+}
+.drop-icon {
+  font-size: 28px;
+  margin-bottom: 8px;
+  display: block;
+}
+.drop-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: #e1e3ee;
+  margin-bottom: 4px;
+}
+.drop-hint {
+  font-size: 11px;
+  color: #6b6992;
+  line-height: 1.5;
+}
+.drop-zone.loaded .drop-hint {
+  color: #4ade80;
+  font-weight: 700;
+}
+.drop-zone input[type="file"] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* ── Email field ── */
+.field-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.field-label {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #9a98b4;
+}
+.field-input {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+  color: #e1e3ee;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.field-input:focus {
+  border-color: var(--cyan);
+}
+.field-input::placeholder { color: #4a4860; }
+.field-hint {
+  font-size: 11px;
+  color: #4a4860;
+  line-height: 1.5;
+}
+
+/* ── Publish button ── */
+.publish-btn {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--eggplant), var(--purple));
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 14px;
+  letter-spacing: .06em;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 24px rgba(102,76,169,0.4);
+}
+.publish-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 28px rgba(102,76,169,0.55);
+}
+.publish-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ── Progress / Log ── */
+.log-card {
+  background: rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px;
+  padding: 18px 20px;
+  display: none;
+  margin-top: 16px;
+}
+.log-card.visible { display: block; }
+.log-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 9px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: #6b6992;
+  margin-bottom: 12px;
+}
+.log-line {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  color: #9a98b4;
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+.log-line .icon { flex-shrink: 0; margin-top: 1px; }
+.log-line.ok   { color: #4ade80; }
+.log-line.err  { color: #f87171; }
+.log-line.info { color: #9a98b4; }
+.log-line.spin { color: #00aeef; }
+
+/* ── Result links ── */
+.result-card {
+  background: linear-gradient(135deg, #0d0a1c, #1a1340);
+  border: 1px solid rgba(102,76,169,0.3);
+  border-radius: 12px;
+  padding: 24px 28px;
+  display: none;
+  margin-top: 16px;
+}
+.result-card.visible { display: block; }
+.result-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 13px;
+  color: #fff;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.result-row {
+  margin-bottom: 14px;
+}
+.result-label {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 8.5px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.result-label.internal { color: var(--purple); }
+.result-label.candidate { color: var(--cyan); }
+.result-note {
+  font-size: 10.5px;
+  color: #6b6992;
+  margin-bottom: 6px;
+}
+.link-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 7px;
+  padding: 9px 12px;
+}
+.link-row a {
+  font-size: 11.5px;
+  color: var(--cyan);
+  text-decoration: none;
+  flex: 1;
+  word-break: break-all;
+  line-height: 1.4;
+}
+.link-row a:hover { text-decoration: underline; }
+.copy-btn {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 5px;
+  color: #9a98b4;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 9px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 4px 9px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s;
+}
+.copy-btn:hover { background: rgba(102,76,169,0.2); color: #c4b5f8; }
+.copy-btn.copied { background: rgba(26,122,74,0.2); color: #4ade80; border-color: rgba(26,122,74,0.3); }
+
+.hs-confirm {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.hs-tag {
+  font-size: 11px;
+  background: rgba(26,122,74,0.15);
+  border: 1px solid rgba(26,122,74,0.3);
+  color: #4ade80;
+  border-radius: 5px;
+  padding: 4px 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+}
+
+/* Reset button */
+.reset-btn {
+  width: 100%;
+  padding: 11px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  background: transparent;
+  color: #6b6992;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: .06em;
+  cursor: pointer;
+  margin-top: 12px;
+  transition: all 0.15s;
+}
+.reset-btn:hover { color: #e1e3ee; border-color: rgba(255,255,255,0.2); }
+
+@media (max-width: 560px) {
+  .drop-grid { grid-template-columns: 1fr; }
+  .card { padding: 20px; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Token warning banner -->
+  <div id="token-banner" style="display:flex;align-items:center;gap:12px;background:rgba(184,110,0,0.12);border:1px solid rgba(184,110,0,0.3);border-radius:10px;padding:14px 18px;margin-bottom:16px;">
+    <span style="font-size:18px;">⚙️</span>
+    <div>
+      <div style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:11px;color:#f59e0b;margin-bottom:3px;">API TOKENS REQUIRED</div>
+      <div style="font-size:12px;color:#9a7a3a;">Click the gear icon (top right) to save your GitHub and HubSpot tokens. This is a one-time setup per browser.</div>
+    </div>
+  </div>
+  <div class="header">
+    <div class="logo">BLK GRVTY &nbsp;·&nbsp; FRANCHISE NOVA</div>
+    <h1 class="title">FN Publisher</h1>
+    <p class="subtitle">Drop both files from Claude, enter the candidate's email, and publish everything in one click.</p>
+  </div>
+
+  <!-- Step 1 — Files -->
+  <div class="card">
+    <div class="card-label">Step 1 — Drop Both HTML Files</div>
+    <div class="drop-grid">
+      <div class="drop-zone" id="zone-internal" ondragover="handleDragOver(event,'internal')" ondragleave="handleDragLeave(event,'internal')" ondrop="handleDrop(event,'internal')">
+        <input type="file" accept=".html" onchange="handleFileInput(event,'internal')">
+        <span class="drop-icon">📋</span>
+        <div class="drop-title">Internal Analysis</div>
+        <div class="drop-hint" id="hint-internal">FN_IntakeAnalysis_XX_2026.html</div>
+      </div>
+      <div class="drop-zone" id="zone-candidate" ondragover="handleDragOver(event,'candidate')" ondragleave="handleDragLeave(event,'candidate')" ondrop="handleDrop(event,'candidate')">
+        <input type="file" accept=".html" onchange="handleFileInput(event,'candidate')">
+        <span class="drop-icon">🌐</span>
+        <div class="drop-title">Candidate Landscape</div>
+        <div class="drop-hint" id="hint-candidate">FN_FranchiseLandscape_XX_2026.html</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 2 — Email only -->
+  <div class="card">
+    <div class="card-label">Step 2 — Candidate Email</div>
+    <div class="field-row">
+      <label class="field-label">Candidate Email (from intake form)</label>
+      <input class="field-input" type="email" id="candidate-email" placeholder="candidate@email.com" oninput="checkReady()">
+      <span class="field-hint">Used to find the contact in HubSpot and post the note + landscape link</span>
+    </div>
+  </div>
+
+  <!-- Step 3 — Publish -->
+  <div class="card">
+    <div class="card-label">Step 3 — Publish Everything</div>
+    <p style="font-size:13px;color:#6b6992;margin-bottom:16px;line-height:1.6;">
+      Pushes both files to GitHub Pages, posts a note to HubSpot,
+      and updates the Landscape URL property. Takes about 10 seconds.
+    </p>
+    <button class="publish-btn" id="publish-btn" onclick="runPublish()" disabled>
+      Publish + Update HubSpot
+    </button>
+  </div>
+
+  <!-- Log -->
+  <div class="log-card" id="log-card">
+    <div class="log-title">Pipeline Log</div>
+    <div id="log-lines"></div>
+  </div>
+
+  <!-- Result -->
+  <div class="result-card" id="result-card">
+    <div class="result-title">✅ Published Successfully</div>
+
+    <div class="result-row">
+      <div class="result-label internal">📋 Internal Intake Analysis</div>
+      <div class="result-note">Nova Guide only — do not share with candidate</div>
+      <div class="link-row">
+        <a id="internal-link" href="#" target="_blank"></a>
+        <button class="copy-btn" onclick="copyLink('internal-link', this)">Copy</button>
+      </div>
+    </div>
+
+    <div class="result-row">
+      <div class="result-label candidate">🌐 Candidate Franchise Landscape</div>
+      <div class="result-note">Ready to share — send this link to the candidate</div>
+      <div class="link-row">
+        <a id="candidate-link" href="#" target="_blank"></a>
+        <button class="copy-btn" onclick="copyLink('candidate-link', this)">Copy</button>
+      </div>
+    </div>
+
+    <div class="hs-confirm" id="hs-confirm"></div>
+
+    <button class="reset-btn" onclick="resetTool()">Start New Candidate</button>
+  </div>
+
+</div>
+
+<script>
+// ── CREDENTIALS — loaded from localStorage ───────────────────
+const GITHUB_OWNER = 'franchisenova';
+const GITHUB_REPO  = 'nova-reports';
+const GITHUB_BASE  = 'https://franchisenova.github.io/nova-reports';
+function getGHToken() { return localStorage.getItem('fn_github_token') || ''; }
+function getHSToken() { return localStorage.getItem('fn_hubspot_token') || ''; }
+
+// ── STATE ─────────────────────────────────────────────────────
+const files = { internal: null, candidate: null };
+
+// ── FILE HANDLING ─────────────────────────────────────────────
+function handleDragOver(e, type) {
+  e.preventDefault();
+  document.getElementById('zone-' + type).classList.add('drag-over');
+}
+function handleDragLeave(e, type) {
+  document.getElementById('zone-' + type).classList.remove('drag-over');
+}
+function handleDrop(e, type) {
+  e.preventDefault();
+  document.getElementById('zone-' + type).classList.remove('drag-over');
+  const file = e.dataTransfer.files[0];
+  if (file) loadFile(file, type);
+}
+function handleFileInput(e, type) {
+  const file = e.target.files[0];
+  if (file) loadFile(file, type);
+}
+function loadFile(file, type) {
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    files[type] = { name: file.name, content: e.target.result };
+    document.getElementById('zone-' + type).classList.add('loaded');
+    document.getElementById('hint-' + type).textContent = '✓ ' + file.name;
+    checkReady();
+  };
+  reader.readAsText(file);
+}
+function checkReady() {
+  const email = document.getElementById('candidate-email').value.trim();
+  const ready = files.internal && files.candidate && email;
+  document.getElementById('publish-btn').disabled = !ready;
+}
+document.getElementById('candidate-email').addEventListener('input', checkReady);
+
+// ── LOGGING ───────────────────────────────────────────────────
+function log(msg, type = 'info') {
+  const card = document.getElementById('log-card');
+  card.classList.add('visible');
+  const icons = { ok: '✓', err: '✗', info: '·', spin: '⟳' };
+  const line = document.createElement('div');
+  line.className = 'log-line ' + type;
+  line.innerHTML = `<span class="icon">${icons[type] || '·'}</span><span>${msg}</span>`;
+  document.getElementById('log-lines').appendChild(line);
+  card.scrollTop = card.scrollHeight;
+}
+
+// ── GITHUB PUSH ───────────────────────────────────────────────
+async function pushToGitHub(filename, content, commitMsg) {
+  const apiUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${filename}`;
+  const encoded = btoa(unescape(encodeURIComponent(content)));
+
+  // Check for existing SHA
+  let sha = null;
+  try {
+    const getResp = await fetch(apiUrl, {
+      headers: { 'Authorization': `Bearer ${getGHToken()}`, 'Accept': 'application/vnd.github+json' }
+    });
+    if (getResp.ok) {
+      const getData = await getResp.json();
+      sha = getData.sha;
+    }
+  } catch(e) {}
+
+  const payload = { message: commitMsg, content: encoded };
+  if (sha) payload.sha = sha;
+
+  const resp = await fetch(apiUrl, {
+    method: 'PUT',
+    headers: {
+      'Authorization': `Bearer ${getGHToken()}`,
+      'Accept': 'application/vnd.github+json',
+      'Content-Type': 'application/json',
+      'X-GitHub-Api-Version': '2022-11-28'
+    },
+    body: JSON.stringify(payload)
+  });
+  if (!resp.ok) {
+    const err = await resp.json();
+    throw new Error(`GitHub ${resp.status}: ${err.message}`);
+  }
+  return await resp.json();
+}
+
+// ── HUBSPOT ───────────────────────────────────────────────────
+async function findHubSpotContact(email) {
+  const resp = await fetch('https://api.hubapi.com/crm/v3/objects/contacts/search', {
+    method: 'POST',
+    headers: { 'Authorization': `Bearer ${getHSToken()}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      filterGroups: [{ filters: [{ propertyName: 'email', operator: 'EQ', value: email }] }],
+      properties: ['email', 'firstname', 'lastname']
+    })
+  });
+  if (!resp.ok) throw new Error(`HubSpot search ${resp.status}`);
+  const data = await resp.json();
+  const contacts = data.results || [];
+  if (!contacts.length) throw new Error(`No HubSpot contact found for ${email}`);
+  return contacts[0].id;
+}
+
+async function postHubSpotNote(contactId, noteBody) {
+  const resp = await fetch('https://api.hubapi.com/crm/v3/objects/notes', {
+    method: 'POST',
+    headers: { 'Authorization': `Bearer ${getHSToken()}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      properties: {
+        hs_timestamp: new Date().toISOString(),
+        hs_note_body: noteBody
+      },
+      associations: [{
+        to: { id: contactId },
+        types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 202 }]
+      }]
+    })
+  });
+  if (!resp.ok) {
+    const err = await resp.json();
+    throw new Error(`HubSpot note ${resp.status}: ${err.message}`);
+  }
+  return await resp.json();
+}
+
+async function updateHubSpotProperty(contactId, candidateLink) {
+  const resp = await fetch(`https://api.hubapi.com/crm/v3/objects/contacts/${contactId}`, {
+    method: 'PATCH',
+    headers: { 'Authorization': `Bearer ${getHSToken()}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ properties: { landscape_url: candidateLink } })
+  });
+  if (!resp.ok) {
+    const err = await resp.json();
+    throw new Error(`HubSpot property ${resp.status}: ${err.message}`);
+  }
+  return await resp.json();
+}
+
+// ── MAIN PIPELINE ─────────────────────────────────────────────
+async function runPublish() {
+  if (!getGHToken() || !getHSToken()) {
+    alert('Please save your API tokens in Settings first (gear icon top right).');
+    return;
+  }
+  const btn        = document.getElementById('publish-btn');
+  const email = document.getElementById('candidate-email').value.trim();
+
+  // Extract initials from filenames
+  const internalName  = files.internal.name;
+  const candidateName = files.candidate.name;
+
+  btn.disabled = true;
+  btn.textContent = 'Publishing…';
+  document.getElementById('log-lines').innerHTML = '';
+  document.getElementById('log-card').classList.add('visible');
+  document.getElementById('result-card').classList.remove('visible');
+
+  const today = new Date();
+  const dateStr = today.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+  const year = today.getFullYear();
+
+  let internalUrl  = '';
+  let candidateUrl = '';
+
+  try {
+    // Step 1 — Push internal analysis
+    log('Pushing internal intake analysis to GitHub…', 'spin');
+    await pushToGitHub(internalName, files.internal.content,
+      `FN intake analysis — ${internalName} — ${today.toISOString().split('T')[0]}`);
+    internalUrl = `${GITHUB_BASE}/${internalName}`;
+    log(`Internal analysis live: ${internalUrl}`, 'ok');
+
+    // Step 2 — Push candidate landscape
+    log('Pushing candidate landscape to GitHub…', 'spin');
+    await pushToGitHub(candidateName, files.candidate.content,
+      `FN candidate landscape — ${candidateName} — ${today.toISOString().split('T')[0]}`);
+    candidateUrl = `${GITHUB_BASE}/${candidateName}`;
+    log(`Candidate landscape live: ${candidateUrl}`, 'ok');
+
+    // Step 3 — Find HubSpot contact
+    log(`Finding HubSpot contact for ${email}…`, 'spin');
+    const contactId = await findHubSpotContact(email);
+    log(`Contact found — ID: ${contactId}`, 'ok');
+
+    // Step 4 — Post note
+    log('Posting note to HubSpot contact record…', 'spin');
+    const noteBody =
+`Franchise Nova — Intake Analysis Generated · ${dateStr}
+
+Internal Intake Analysis (Nova Guide only)
+${internalUrl}
+
+Candidate Franchise Landscape (share with candidate)
+${candidateUrl}
+
+Generated by Franchise Nova · BLK GRVTY`;
+
+    await postHubSpotNote(contactId, noteBody);
+    log('Note posted to HubSpot activity feed', 'ok');
+
+    // Step 5 — Update Landscape URL property
+    log('Updating Landscape URL property…', 'spin');
+    await updateHubSpotProperty(contactId, candidateUrl);
+    log('Landscape URL property updated', 'ok');
+
+    log('All done!', 'ok');
+
+    // Show results
+    document.getElementById('internal-link').href = internalUrl;
+    document.getElementById('internal-link').textContent = internalUrl;
+    document.getElementById('candidate-link').href = candidateUrl;
+    document.getElementById('candidate-link').textContent = candidateUrl;
+
+    const hsConfirm = document.getElementById('hs-confirm');
+    hsConfirm.innerHTML = `
+      <span class="hs-tag">✓ HubSpot note posted</span>
+      <span class="hs-tag">✓ Landscape URL updated</span>
+    `;
+
+    document.getElementById('result-card').classList.add('visible');
+    btn.textContent = '✓ Published';
+
+  } catch(err) {
+    log(`Error: ${err.message}`, 'err');
+    btn.disabled = false;
+    btn.textContent = 'Retry';
+  }
+}
+
+// ── COPY LINKS ────────────────────────────────────────────────
+function copyLink(elId, btn) {
+  const text = document.getElementById(elId).textContent.trim();
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = 'Copied ✓';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+// ── RESET ─────────────────────────────────────────────────────
+function resetTool() {
+  files.internal = null;
+  files.candidate = null;
+  ['internal','candidate'].forEach(t => {
+    document.getElementById('zone-' + t).classList.remove('loaded','drag-over');
+    document.getElementById('hint-' + t).textContent =
+      t === 'internal' ? 'FN_IntakeAnalysis_XX_2026.html' : 'FN_FranchiseLandscape_XX_2026.html';
+  });
+  ['candidate-email'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  document.getElementById('publish-btn').disabled = true;
+  document.getElementById('publish-btn').textContent = 'Publish + Update HubSpot';
+  document.getElementById('log-card').classList.remove('visible');
+  document.getElementById('result-card').classList.remove('visible');
+  document.getElementById('log-lines').innerHTML = '';
+}
+</script>
+
+<!-- Settings Modal -->
+<div id="settings-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:999;align-items:center;justify-content:center;">
+  <div style="background:#161033;border:1px solid rgba(102,76,169,0.3);border-radius:14px;padding:32px;width:100%;max-width:480px;margin:20px;">
+    <div style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:16px;color:#fff;margin-bottom:6px;">API Settings</div>
+    <div style="font-size:12px;color:#6b6992;margin-bottom:24px;">Tokens are saved to your browser only — never sent anywhere except GitHub and HubSpot.</div>
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <div>
+        <label style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#9a98b4;display:block;margin-bottom:6px;">GitHub Token</label>
+        <input id="s-github" type="password" style="width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:10px 14px;font-family:'Lato',sans-serif;font-size:13px;color:#e1e3ee;outline:none;" placeholder="github_pat_...">
+      </div>
+      <div>
+        <label style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#9a98b4;display:block;margin-bottom:6px;">HubSpot Token</label>
+        <input id="s-hubspot" type="password" style="width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:10px 14px;font-family:'Lato',sans-serif;font-size:13px;color:#e1e3ee;outline:none;" placeholder="pat-na1-...">
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:20px;">
+      <button onclick="saveSettings()" style="flex:1;padding:12px;background:linear-gradient(135deg,#452e80,#664ca9);border:none;border-radius:8px;color:#fff;font-family:'Montserrat',sans-serif;font-weight:800;font-size:12px;cursor:pointer;">Save Tokens</button>
+      <button onclick="closeSettings()" style="padding:12px 20px;background:transparent;border:1px solid rgba(255,255,255,0.1);border-radius:8px;color:#9a98b4;font-family:'Montserrat',sans-serif;font-weight:700;font-size:12px;cursor:pointer;">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Settings gear icon -->
+<div style="position:fixed;top:20px;right:20px;z-index:100;">
+  <button onclick="openSettings()" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:8px 12px;color:#9a98b4;font-size:16px;cursor:pointer;" title="API Settings">⚙️</button>
+</div>
+
+<script>
+function openSettings() {
+  document.getElementById('s-github').value  = localStorage.getItem('fn_github_token') || '';
+  document.getElementById('s-hubspot').value = localStorage.getItem('fn_hubspot_token') || '';
+  const m = document.getElementById('settings-modal');
+  m.style.display = 'flex';
+}
+function closeSettings() {
+  document.getElementById('settings-modal').style.display = 'none';
+}
+function saveSettings() {
+  const gh = document.getElementById('s-github').value.trim();
+  const hs = document.getElementById('s-hubspot').value.trim();
+  if (!gh || !hs) { alert('Both tokens are required.'); return; }
+  localStorage.setItem('fn_github_token', gh);
+  localStorage.setItem('fn_hubspot_token', hs);
+  closeSettings();
+  checkTokensOnLoad();
+}
+function checkTokensOnLoad() {
+  const hasTokens = getGHToken() && getHSToken();
+  const banner = document.getElementById('token-banner');
+  if (banner) banner.style.display = hasTokens ? 'none' : 'flex';
+}
+window.addEventListener('load', checkTokensOnLoad);
+</script>
+
+</body>
+</html>
