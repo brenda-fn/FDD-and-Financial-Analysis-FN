@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Franchise Nova — Systems Worth Exploring</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Lato', sans-serif;
+  background: #e8eaf0;
+  color: #15131f;
+  line-height: 1.6;
+  padding: 40px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+.doc { max-width: 880px; margin: 0 auto; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 32px rgba(0,0,0,0.12); }
+
+/* ── HEADER ── */
+.header { background: linear-gradient(135deg,#05040a,#0d0a1c,#161033); padding: 34px 44px 28px; position: relative; overflow: hidden; border-top: 4px solid #00aeef; }
+.header::before { content:''; position:absolute; top:-80px; right:-80px; width:360px; height:360px; background:radial-gradient(circle,rgba(102,76,169,0.38) 0%,transparent 65%); pointer-events:none; }
+.header::after  { content:''; position:absolute; bottom:-60px; left:-60px; width:280px; height:280px; background:radial-gradient(circle,rgba(0,174,239,0.2) 0%,transparent 65%); pointer-events:none; }
+.h-logo { font-family:'Montserrat',sans-serif; font-weight:900; font-size:10px; letter-spacing:.18em; color:rgba(255,255,255,0.38); margin-bottom:14px; }
+.h-eye  { font-family:'Montserrat',sans-serif; font-weight:700; font-size:9px; letter-spacing:.28em; text-transform:uppercase; color:#00aeef; margin-bottom:8px; }
+.h-name { font-family:'Montserrat',sans-serif; font-weight:900; font-size:32px; color:#fff; margin-bottom:8px; line-height:1.1; }
+.h-meta { font-size:13px; color:#b0aed0; }
+.h-meta strong { color:#e1e3ee; }
+
+/* ── SECTIONS ── */
+.section { padding:24px 44px; border-bottom:1px solid #e8eaf0; }
+.section:last-of-type { border-bottom:none; }
+.sec-label { font-family:'Montserrat',sans-serif; font-weight:800; font-size:9px; letter-spacing:.22em; text-transform:uppercase; color:#452e80; margin-bottom:16px; }
+
+/* ── INTRO ── */
+.landscape-intro { font-size:13px; color:#555; line-height:1.6; margin-bottom:10px; padding:12px 16px; background:#f5f5fa; border-left:3px solid #00aeef; border-radius:0 7px 7px 0; }
+.landscape-note  { font-size:11px; color:#aaa; font-style:italic; margin-bottom:16px; }
+
+/* ── LANDSCAPE CARDS ── */
+.ls-grid { display:flex; flex-direction:column; gap:12px; }
+.ls-card { border:1px solid #e8eaf0; border-radius:9px; overflow:hidden; background:#fafafa; }
+.ls-card-top { padding:13px 16px 10px; border-bottom:1px solid #e8eaf0; }
+.ls-card-header { display:flex; justify-content:space-between; align-items:flex-start; gap:8px; margin-bottom:6px; }
+.ls-name { font-family:'Montserrat',sans-serif; font-weight:800; font-size:13px; color:#15131f; }
+.ls-cat  { font-family:'Montserrat',sans-serif; font-weight:700; font-size:8px; letter-spacing:.08em; text-transform:uppercase; padding:3px 9px; border-radius:999px; white-space:nowrap; flex-shrink:0; }
+.ls-pet  { background:rgba(102,76,169,0.1); color:#664ca9; }
+.ls-why  { font-size:12.5px; color:#444; line-height:1.55; }
+.ls-card-bottom { padding:10px 16px; background:#f0eefa; display:grid; grid-template-columns:1fr 1fr; gap:6px; }
+.ls-stat { display:flex; flex-direction:column; gap:2px; }
+.ls-stat-label { font-family:'Montserrat',sans-serif; font-weight:700; font-size:8px; letter-spacing:.08em; text-transform:uppercase; color:#888; }
+.ls-stat-val { font-size:12px; color:#15131f; font-weight:700; line-height:1.3; }
+.ls-stat-val.good { color:#1a7a4a; }
+.ls-stat-val.warn { color:#b86e00; }
+.ls-stat-val.note { color:#452e80; }
+.ls-tags { padding:8px 16px 12px; display:flex; flex-wrap:wrap; gap:6px; }
+.ls-tag  { font-size:10.5px; color:#555; background:#eeedf8; border-radius:5px; padding:3px 9px; font-family:'Montserrat',sans-serif; font-weight:700; }
+.ls-tag.sba   { color:#1a7a4a; background:#eaf6ef; }
+.ls-tag.geo   { color:#00709a; background:#e8f7fd; }
+.ls-tag.recur { color:#452e80; background:#ede9fa; }
+.ls-tag.warn  { color:#b86e00; background:#fdf5e6; }
+
+/* ── RANK BAR ── */
+.rank-bar-r1 { background:#452e80; padding:6px 18px; display:flex; align-items:center; justify-content:space-between; }
+.rank-bar-r2, .rank-bar-r3, .rank-bar-r4, .rank-bar-r5, .rank-bar-r6 { background:#282560; padding:6px 18px; display:flex; align-items:center; justify-content:space-between; }
+.rank-num  { font-family:'Montserrat',sans-serif; font-weight:900; font-size:11px; color:#fff; }
+.rank-note { font-size:10px; color:rgba(255,255,255,0.65); }
+
+/* ── DISCLAIMER ── */
+.disclaimer { background:#f5f5fa; border-top:1px solid #e8eaf0; padding:18px 44px; }
+.disclaimer p { font-size:11.5px; color:#888; line-height:1.7; }
+.disclaimer strong { color:#555; }
+
+/* ── FOOTER ── */
+.doc-footer { background:#0d0a1c; padding:14px 44px; }
+.footer-main { font-size:11.5px; color:#9a98b4; line-height:1.6; }
+
+@media print {
+  body { background:#fff; padding:0; }
+  .doc { box-shadow:none; border-radius:0; }
+  .header, .rank-bar-r1, .rank-bar-r2, .rank-bar-r3, .rank-bar-r4, .rank-bar-r5, .rank-bar-r6, .ls-card-bottom, .doc-footer { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+}
+@media (max-width:640px) {
+  .section { padding:18px 20px; }
+  .header  { padding:24px 20px; }
+  .ls-card-bottom { grid-template-columns:1fr; }
+  .disclaimer { padding:16px 20px; }
+  .doc-footer { padding:14px 20px; }
+}
+</style>
+</head>
+<body>
+<div class="doc">
+
+<header class="header">
+  <div class="h-logo">BLK GRVTY &nbsp;/&nbsp; FRANCHISE NOVA</div>
+  <div class="h-eye">Prepared for Your Review</div>
+  <h1 class="h-name">Leonard Black</h1>
+  <p class="h-meta">
+    <strong>Pet Services</strong> &nbsp;·&nbsp; Target: Atlanta, GA (30338 / Dunwoody / Sandy Springs) &nbsp;·&nbsp; Semi-Absentee
+  </p>
+</header>
+
+<div class="section">
+  <div class="sec-label">About This List</div>
+  <p class="landscape-intro">
+    A curated starting point — systems that fit the Pet Services sector, your recurring-revenue focus, and a semi-absentee, multi-unit plan. These systems were identified based on publicly available information — their territory availability, revenue model, ownership structure, and fit with your goals. Since you already own a PoolScouts franchise (Home Services), this list is fully independent of that — no overlap or conflict with your existing business.<br><br>
+    This is a starting point for your own research and conversation with your Nova Guide — not a formal recommendation. Any system you want to explore further will go through Franchise Nova's full FDD analysis process before any decisions are made.<br><br>
+    <strong>Est. Investment</strong> = total estimated cost to open one location (franchise fee + build-out + equipment + working capital) — not what you earn. <strong>B2C</strong> = your customers are individual consumers.
+  </p>
+  <p class="landscape-note">⚑ Public information only — no FDDs reviewed. Territory availability must be confirmed directly with each franchisor before proceeding.</p>
+</div>
+
+<div class="section">
+  <div class="sec-label">Systems Worth Exploring — Ranked by Fit</div>
+  <div class="ls-grid">
+
+    <!-- RANK 1 -->
+    <div class="ls-card">
+      <div class="rank-bar-r1">
+        <span class="rank-num">RANK 1</span>
+        <span class="rank-note">Multi-territory native · 3+ territories standard · No confirmed locations in your zip</span>
+      </div>
+      <div class="ls-card-top">
+        <div class="ls-card-header">
+          <div class="ls-name">Dog Training Elite</div>
+          <span class="ls-cat ls-pet">Pet Services</span>
+        </div>
+        <p class="ls-why"><strong>B2C · Recurring training package model.</strong> In-home and small-group dog training franchise with a strong recurring revenue structure — most popular package generates ongoing client relationships, not one-time transactions. Confirmed Atlanta-area locations exist in North Atlanta, West Atlanta, and Woodstock, but no confirmed presence found specifically in Dunwoody or Sandy Springs — a genuine opportunity to be first in your target zip. Franchise requires a 3-territory minimum and most owners hold 3+ territories, fitting a portfolio-builder profile. Low staffing requirement and a recession-resistant service category.</p>
+      </div>
+      <div class="ls-card-bottom">
+        <div class="ls-stat"><span class="ls-stat-label">Est. Total Investment / Unit</span><span class="ls-stat-val note">$77K–$130K (per territory)</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">Revenue Model</span><span class="ls-stat-val good">Recurring training packages ✓</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">Minimum Territories</span><span class="ls-stat-val good">3-pack standard</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">System Size</span><span class="ls-stat-val">Multi-state · Established</span></div>
+      </div>
+      <div class="ls-tags">
+        <span class="ls-tag geo">No confirmed Dunwoody/Sandy Springs presence — first-mover</span>
+        <span class="ls-tag recur">Recurring training packages</span>
+        <span class="ls-tag">Semi-absentee ✓</span>
+        <span class="ls-tag">Multi-unit native — 3-pack minimum</span>
+      </div>
+    </div>
+
+    <!-- RANK 2 -->
+    <div class="ls-card">
+      <div class="rank-bar-r2">
+        <span class="rank-num">RANK 2</span>
+        <span class="rank-note">Recognized regional brand · No confirmed Dunwoody/Sandy Springs location · Strong Atlanta metro presence</span>
+      </div>
+      <div class="ls-card-top">
+        <div class="ls-card-header">
+          <div class="ls-name">Camp Bow Wow</div>
+          <span class="ls-cat ls-pet">Pet Services</span>
+        </div>
+        <p class="ls-why"><strong>B2C · Membership and per-stay daycare/boarding model.</strong> One of the most recognized dog daycare and boarding brands in the country with 220+ locations. Confirmed Atlanta-metro locations exist in East Atlanta, Duluth, Alpharetta, Lawrenceville, and Woodstock — but nothing confirmed specifically in your target Dunwoody/Sandy Springs zip. The brand recognition reduces consumer education risk compared to a newer concept, while the specific territory remains open. All-inclusive pricing model and Camper Cam technology differentiate the customer experience from local independent competitors already in the area.</p>
+      </div>
+      <div class="ls-card-bottom">
+        <div class="ls-stat"><span class="ls-stat-label">Est. Total Investment / Unit</span><span class="ls-stat-val warn">$500K–$1M+</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">Revenue Model</span><span class="ls-stat-val good">Daycare/boarding · Recurring ✓</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">System Size</span><span class="ls-stat-val good">220+ locations · Established</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">Min. Capital Required</span><span class="ls-stat-val">$500K liquid</span></div>
+      </div>
+      <div class="ls-tags">
+        <span class="ls-tag geo">No confirmed Dunwoody/Sandy Springs location</span>
+        <span class="ls-tag recur">Recurring boarding/daycare revenue</span>
+        <span class="ls-tag">Semi-absentee ✓</span>
+        <span class="ls-tag warn">Higher investment threshold</span>
+      </div>
+    </div>
+
+    <!-- RANK 3 -->
+    <div class="ls-card">
+      <div class="rank-bar-r3">
+        <span class="rank-num">RANK 3</span>
+        <span class="rank-note">Nationally expanding · No confirmed Georgia saturation found · Low investment entry</span>
+      </div>
+      <div class="ls-card-top">
+        <div class="ls-card-header">
+          <div class="ls-name">Cooper's Scoopers</div>
+          <span class="ls-cat ls-pet">Pet Services</span>
+        </div>
+        <p class="ls-why"><strong>B2C/B2B · Recurring residential and commercial waste removal contracts.</strong> Eco-friendly pet waste removal franchise backed by Loyalty Brands, expanding aggressively nationwide with a goal of 3,000 trucks. Home-based, mobile model with no retail space required. Recurring weekly/biweekly service contracts for both residential and commercial clients create predictable cash flow. Semi-absentee ownership explicitly supported — owner manages hired technicians rather than performing the service personally. No confirmed existing franchisee found in the Atlanta market, representing an open territory opportunity.</p>
+      </div>
+      <div class="ls-card-bottom">
+        <div class="ls-stat"><span class="ls-stat-label">Est. Total Investment / Unit</span><span class="ls-stat-val note">$51K–$75K (Area Rep: $159K–$320K)</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">Revenue Model</span><span class="ls-stat-val good">Recurring service contracts ✓</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">System Size</span><span class="ls-stat-val">7 locations · Early-stage, expanding fast</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">Liquid Capital Required</span><span class="ls-stat-val">$50,000</span></div>
+      </div>
+      <div class="ls-tags">
+        <span class="ls-tag geo">No confirmed Atlanta franchisee — open territory</span>
+        <span class="ls-tag recur">Recurring B2C/B2B contracts</span>
+        <span class="ls-tag">Semi-absentee ✓</span>
+        <span class="ls-tag warn">Early-stage brand — verify FDD financial history</span>
+      </div>
+    </div>
+
+    <!-- RANK 4 -->
+    <div class="ls-card">
+      <div class="rank-bar-r4">
+        <span class="rank-num">RANK 4</span>
+        <span class="rank-note">Multi-revenue stream model · Home-based · No confirmed Atlanta location found</span>
+      </div>
+      <div class="ls-card-top">
+        <div class="ls-card-header">
+          <div class="ls-name">Pet Butler</div>
+          <span class="ls-cat ls-pet">Pet Services</span>
+        </div>
+        <p class="ls-why"><strong>B2C/B2B · Recurring waste removal plus pet care and commercial contracts.</strong> Multi-revenue stream pet waste removal franchise — headquarters handles call scheduling and payments, reducing the owner's day-to-day administrative load. $147 billion pet industry backdrop with 85 million pet-owning households nationally. Recurring revenue model spans residential subscriptions, pet care add-ons, and commercial property contracts (HOAs, apartment complexes, dog parks). No confirmed existing Atlanta-area franchisee identified in available public listings.</p>
+      </div>
+      <div class="ls-card-bottom">
+        <div class="ls-stat"><span class="ls-stat-label">Est. Total Investment / Unit</span><span class="ls-stat-val note">$50K–$90K</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">Revenue Model</span><span class="ls-stat-val good">Recurring multi-stream ✓</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">System Size</span><span class="ls-stat-val">Multi-state · Established</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">Liquid Capital Required</span><span class="ls-stat-val">$50,000</span></div>
+      </div>
+      <div class="ls-tags">
+        <span class="ls-tag geo">No confirmed Atlanta franchisee found</span>
+        <span class="ls-tag recur">Recurring B2C/B2B revenue streams</span>
+        <span class="ls-tag">Semi-absentee ✓</span>
+        <span class="ls-tag warn">Verify territory availability directly</span>
+      </div>
+    </div>
+
+    <!-- RANK 5 -->
+    <div class="ls-card">
+      <div class="rank-bar-r5">
+        <span class="rank-num">RANK 5</span>
+        <span class="rank-note">Recurring subscription model · Mobile/scalable retail format · Verify Dunwoody zone</span>
+      </div>
+      <div class="ls-card-top">
+        <div class="ls-card-header">
+          <div class="ls-name">Pet Wants</div>
+          <span class="ls-cat ls-pet">Pet Services</span>
+        </div>
+        <p class="ls-why"><strong>B2C · Recurring fresh pet food subscription/delivery model.</strong> The only national provider of freshly made pet food delivered direct to customers, with grooming recently added as a core service line. Actively expanding with Georgia named as one of the franchisor's priority growth states alongside Texas, North Carolina, and South Carolina. Starts as a mobile delivery model and can scale into a full retail storefront — flexible entry point. Subscription-based delivery creates strong recurring revenue and customer retention. Note: this is an active, hands-on ownership model — Pet Wants states it is not designed for fully absentee owners, though a manager-supported semi-absentee structure may still be workable depending on territory size.</p>
+      </div>
+      <div class="ls-card-bottom">
+        <div class="ls-stat"><span class="ls-stat-label">Est. Total Investment / Unit</span><span class="ls-stat-val note">$130K–$202K</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">Revenue Model</span><span class="ls-stat-val good">Recurring subscription delivery ✓</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">Georgia Expansion</span><span class="ls-stat-val good">Named priority growth state</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">System Size</span><span class="ls-stat-val">60+ stores · Targeting 200 by 2026</span></div>
+      </div>
+      <div class="ls-tags">
+        <span class="ls-tag geo">Georgia named priority expansion state</span>
+        <span class="ls-tag recur">Recurring subscription revenue</span>
+        <span class="ls-tag warn">More owner-involved model — verify semi-absentee fit</span>
+      </div>
+    </div>
+
+    <!-- RANK 6 -->
+    <div class="ls-card">
+      <div class="rank-bar-r6">
+        <span class="rank-num">RANK 6</span>
+        <span class="rank-note">Mobile grooming model · Low overhead · Verify specific zip availability</span>
+      </div>
+      <div class="ls-card-top">
+        <div class="ls-card-header">
+          <div class="ls-name">Zoomin' Groomin</div>
+          <span class="ls-cat ls-pet">Pet Services</span>
+        </div>
+        <p class="ls-why"><strong>B2C · Recurring mobile grooming appointments.</strong> Mobile pet grooming franchise expanding nationwide — set your own schedule with a fully mobile, van-based service model that avoids the retail saturation issue affecting fixed-location grooming and daycare concepts in the Dunwoody/Sandy Springs corridor. Recurring grooming appointments (typically every 4–6 weeks) create predictable repeat revenue. Lower overhead than a storefront concept since there's no lease or build-out cost — the investment is concentrated in the mobile unit and equipment. Semi-absentee ownership achievable with a hired groomer managing the van.</p>
+      </div>
+      <div class="ls-card-bottom">
+        <div class="ls-stat"><span class="ls-stat-label">Est. Total Investment / Unit</span><span class="ls-stat-val note">$50K–$100K</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">Revenue Model</span><span class="ls-stat-val good">Recurring grooming appointments ✓</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">Overhead</span><span class="ls-stat-val good">Low — mobile, no retail lease</span></div>
+        <div class="ls-stat"><span class="ls-stat-label">System Size</span><span class="ls-stat-val">Multi-state · Growing</span></div>
+      </div>
+      <div class="ls-tags">
+        <span class="ls-tag geo">Mobile model — bypasses fixed-location saturation</span>
+        <span class="ls-tag recur">Recurring grooming revenue</span>
+        <span class="ls-tag">Semi-absentee ✓</span>
+        <span class="ls-tag warn">Verify specific zip availability with franchisor</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="disclaimer">
+  <p><strong>Important:</strong> This list is based on publicly available information only. Franchise Nova has not reviewed the Franchise Disclosure Document (FDD) for any of these systems on your behalf. Investment figures are estimates — actual costs vary by location and market. Territory availability must be confirmed directly with each franchisor before proceeding. This document is a starting point for your research and conversation with your Nova Guide, not a recommendation to invest in any specific franchise system. All investment decisions should be made after full FDD review, legal counsel, and financial due diligence.</p>
+</div>
+
+<div class="doc-footer">
+  <p class="footer-main">Franchise Nova &nbsp;·&nbsp; A BLK GRVTY Initiative &nbsp;·&nbsp; Prepared for Leonard Black &nbsp;·&nbsp; 2026</p>
+</div>
+
+</div>
+</body>
+</html>
